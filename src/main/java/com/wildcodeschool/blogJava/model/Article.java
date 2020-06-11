@@ -2,7 +2,7 @@ package com.wildcodeschool.blogJava.model;
 
 import java.util.Date;
 
-public class Post {
+public class Article {
 
     private Integer id;
     private String title;
@@ -11,9 +11,9 @@ public class Post {
     private Date published;
     private User user;
 
-    public Post() {}
+    public Article() {}
 
-    public Post(Integer id, String title, String content, String image, Date published, User user) { 
+    public Article(Integer id, String title, String content, String image, Date published, User user) { 
         this.id = id;
         this.title = title;
         this.content = content;

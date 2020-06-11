@@ -1,5 +1,5 @@
 package com.wildcodeschool.blogJava.dao;
 
-public class PostDao {
+public interface ArticleDao {
     
 }

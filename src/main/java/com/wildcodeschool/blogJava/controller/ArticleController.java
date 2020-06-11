@@ -14,12 +14,12 @@ public class ArticleController {
     
     private static final String TEMPLATE_HOME = "home";
     private static final String TEMPLATE_ARTICLE = "article"; 
-    private static final String TEMPLATE_ARTICLE_EDIT = "article-edit"; 
+    // private static final String TEMPLATE_ARTICLE_EDIT = "article-edit"; 
 
     @GetMapping({"/", "/articles"})
     public String goHome(final Model model) {
 
-        model.addAttributes("articles", postRepository.findAll());
+        model.addAttributes("articles", articleRepository.findAll());
 
         return TEMPLATE_HOME;
     }
@@ -27,11 +27,11 @@ public class ArticleController {
     @GetMapping("/article/{id}")
     public String goHome(final Model model, @PathVariable final Integer id) {
 
-        final Post article = new postRepository.findById(id);
+        Article article = new articleRepository.findById(id);
         
-        if (post == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Article inconnu");
+        if (article == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Article inconnu");
 
-        model.addAttributes("article",post);
+        model.addAttributes("article",article);
 
         return TEMPLATE_ARTICLE;
     }
