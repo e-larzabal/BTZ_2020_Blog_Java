@@ -1,6 +1,7 @@
 package com.wildcodeschool.blogJava.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Article {
 
@@ -10,16 +11,19 @@ public class Article {
     private String image;
     private Date published;
     private User user;
+    
+    private List<Tag> listTag;
 
     public Article() {}
 
-    public Article(Integer id, String title, String content, String image, Date published, User user) { 
+    public Article(Integer id, String title, String content, String image, Date published, User user, List<Tag> listTag) { 
         this.id = id;
         this.title = title;
         this.content = content;
         this.image = image;
         this.published = published;
         this.user = user;
+        this.listTag = listTag;
     }
 
     public Integer getId() {
@@ -69,5 +73,14 @@ public class Article {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public List<Tag> getListTag() {
+        return this.listTag;
+    }
+
+    public void setListTag(List<Tag> listTag) {
+        this.listTag = listTag;
+    }
+
    
 }
