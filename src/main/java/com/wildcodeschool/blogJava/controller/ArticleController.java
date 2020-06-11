@@ -1,5 +1,9 @@
 package com.wildcodeschool.blogJava.controller;
 
+import com.wildcodeschool.blogJava.dao.ArticleDao;
+import com.wildcodeschool.blogJava.model.Article;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,22 +20,25 @@ public class ArticleController {
     private static final String TEMPLATE_ARTICLE = "article"; 
     // private static final String TEMPLATE_ARTICLE_EDIT = "article-edit"; 
 
-    @GetMapping({"/", "/articles"})
-    public String goHome(final Model model) {
+    @Autowired 
+    private ArticleDao articleDao;
 
-        model.addAttributes("articles", articleRepository.findAll());
+    @GetMapping({"/", "/articles"})
+    public String getHome(Model model) {
+
+        model.addAttribute("articles", articleDao.findAll());
 
         return TEMPLATE_HOME;
     }
 
     @GetMapping("/article/{id}")
-    public String goHome(final Model model, @PathVariable final Integer id) {
+    public String getArticle(Model model, @PathVariable Integer id) {
 
-        Article article = new articleRepository.findById(id);
+        Article article = articleDao.findById(id);
         
         if (article == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Article inconnu");
 
-        model.addAttributes("article",article);
+        model.addAttribute("article",article);
 
         return TEMPLATE_ARTICLE;
     }

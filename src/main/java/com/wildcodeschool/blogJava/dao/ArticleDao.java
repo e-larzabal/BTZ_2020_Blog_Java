@@ -7,12 +7,12 @@ public interface ArticleDao {
     
     Article save(Article entity);
 
-    Article findById(Long id);
+    Article findById(Integer id);
 
     List<Article> findAll();
 
     Article update(Article entity);
 
-    void deleteById(Long id);
+    void deleteById(Integer id);
 
 }
