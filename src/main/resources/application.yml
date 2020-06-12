@@ -1,0 +1,26 @@
+hello: "C'est la prod"
+
+spring:
+  profiles: prod
+
+server:
+  port: 8081
+
+mysql:
+  url: ${APP_URL}
+  username: ${APP_USERNAME}
+  password: ${APP_PASSWORD}
+
+---
+hello: "C'est le mode dev"
+
+spring:
+  profiles: default
+
+server:
+  port: 8080
+
+mysql:
+  url: "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA_TEST?serverTimezone=GMT"
+  username: root
+  password: egh5ohCuey0o
