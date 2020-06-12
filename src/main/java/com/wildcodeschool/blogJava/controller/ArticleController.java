@@ -11,19 +11,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
-
-
 @Controller
 public class ArticleController {
-    
-    private static final String TEMPLATE_HOME = "home";
-    private static final String TEMPLATE_ARTICLE = "article"; 
-    // private static final String TEMPLATE_ARTICLE_EDIT = "article-edit"; 
 
-    @Autowired 
+    private static final String TEMPLATE_HOME = "home";
+    private static final String TEMPLATE_ARTICLE = "article";
+    // private static final String TEMPLATE_ARTICLE_EDIT = "article-edit";
+
+    @Autowired
     private ArticleDao articleDao;
 
-    @GetMapping({"/", "/articles"})
+    @GetMapping({ "/", "/articles" })
     public String getHome(Model model) {
 
         model.addAttribute("articles", articleDao.findAll());
@@ -35,10 +33,11 @@ public class ArticleController {
     public String getArticle(Model model, @PathVariable Integer id) {
 
         Article article = articleDao.findById(id);
-        
-        if (article == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Article inconnu");
 
-        model.addAttribute("article",article);
+        if (article == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article inconnu");
+
+        model.addAttribute("article", article);
 
         return TEMPLATE_ARTICLE;
     }
