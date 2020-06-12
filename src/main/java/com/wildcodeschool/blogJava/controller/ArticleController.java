@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Controller
 public class ArticleController {
 
-    private static final String TEMPLATE_HOME = "home";
+    private static final String TEMPLATE_HOME = "index";
     private static final String TEMPLATE_ARTICLE = "article";
     // private static final String TEMPLATE_ARTICLE_EDIT = "article-edit";
 
