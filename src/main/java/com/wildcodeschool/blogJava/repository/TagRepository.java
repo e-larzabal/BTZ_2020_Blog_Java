@@ -24,7 +24,7 @@ public class TagRepository {
      * List of article's tags
      */
     @Autowired
-    private AppConfig config;
+    private static AppConfig config;
 
     public static List<Tag> findAllInArticle(Integer id_article) {
 

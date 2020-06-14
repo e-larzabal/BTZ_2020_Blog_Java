@@ -16,7 +16,7 @@ public class UserRepository {
     // private final static String DB_USER = "root";
     // private final static String DB_PASSWORD = "egh5ohCuey0o";
     @Autowired
-    private AppConfig config;
+    private static AppConfig config;
 
     /*
      * A user by his id
