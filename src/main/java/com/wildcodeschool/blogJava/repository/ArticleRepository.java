@@ -1,7 +1,6 @@
 package com.wildcodeschool.blogJava.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.wildcodeschool.blogJava.config.AppConfig;
-import com.wildcodeschool.blogJava.dao.ArticleDao;
+// import com.wildcodeschool.blogJava.dao.ArticleDao;
+import com.wildcodeschool.blogJava.dao.CrudDao;
 import com.wildcodeschool.blogJava.model.Article;
 import com.wildcodeschool.blogJava.model.Tag;
 import com.wildcodeschool.blogJava.model.User;
@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ArticleRepository implements ArticleDao {
+public class ArticleRepository implements CrudDao<Article> {
 
     // private final static String DB_URL =
     // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
@@ -48,12 +48,12 @@ public class ArticleRepository implements ArticleDao {
             while (resultSet.next()) {
 
                 // Read the article
-                Integer id = resultSet.getInt("id");
+                Long id = resultSet.getLong("id");
                 String title = resultSet.getString("title");
                 String content = resultSet.getString("content");
                 String image = resultSet.getString("image");
                 Date published = resultSet.getDate("published");
-                Integer id_user = resultSet.getInt("id_user");
+                Long id_user = resultSet.getLong("id_user");
 
                 // Read the article's author
                 User user = new User();
@@ -96,7 +96,7 @@ public class ArticleRepository implements ArticleDao {
     }
 
     @Override
-    public Article findById(Integer id) {
+    public Article findById(Long id) {
 
         try {
 
@@ -118,7 +118,7 @@ public class ArticleRepository implements ArticleDao {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         // TODO Auto-generated method stub
 
     }

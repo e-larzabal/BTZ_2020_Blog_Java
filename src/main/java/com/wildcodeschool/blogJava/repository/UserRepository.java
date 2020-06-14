@@ -21,7 +21,7 @@ public class UserRepository {
     /*
      * A user by his id
      */
-    public static User findById(Integer id) {
+    public static User findById(Long id) {
 
         Connection connection = null;
         PreparedStatement statement = null;
