@@ -1,28 +1,35 @@
 package com.wildcodeschool.blogJava.repository;
 
 import com.wildcodeschool.blogJava.config.AppConfig;
+import com.wildcodeschool.blogJava.dao.CrudDao;
 import com.wildcodeschool.blogJava.model.User;
 import org.springframework.stereotype.Repository;
 import com.wildcodeschool.blogJava.util.JdbcUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.*;
+import java.util.List;
 
 @Repository
-public class UserRepository {
+public class UserRepository implements CrudDao<User> {
 
     // private final static String DB_URL =
     // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
     // private final static String DB_USER = "root";
     // private final static String DB_PASSWORD = "egh5ohCuey0o";
     @Autowired
-    private static AppConfig config;
+    private AppConfig config;
 
-    /*
-     * A user by his id
-     */
-    public static User findById(Long id) {
 
+    @Override
+    public User save(User entity) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public User findById(Long id) {
+        // TODO Auto-generated method stub
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -56,5 +63,23 @@ public class UserRepository {
         }
 
         return null;
+    }
+
+    @Override
+    public List<User> findAll() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public User update(User entity) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        // TODO Auto-generated method stub
+
     }
 }

@@ -9,8 +9,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.wildcodeschool.blogJava.config.AppConfig;
-// import com.wildcodeschool.blogJava.dao.ArticleDao;
+import com.wildcodeschool.blogJava.dao.UserDao;
 import com.wildcodeschool.blogJava.dao.CrudDao;
+import com.wildcodeschool.blogJava.dao.TagDao;
 import com.wildcodeschool.blogJava.model.Article;
 import com.wildcodeschool.blogJava.model.Tag;
 import com.wildcodeschool.blogJava.model.User;
@@ -28,7 +29,10 @@ public class ArticleRepository implements CrudDao<Article> {
     // private final static String DB_PASSWORD = "egh5ohCuey0o";
 
     @Autowired
-    private static AppConfig config;
+    private AppConfig config;
+    private UserDao userDao;
+    private TagDao tagDao;
+
 
     @Override
     public List<Article> findAll() {
@@ -57,11 +61,11 @@ public class ArticleRepository implements CrudDao<Article> {
 
                 // Read the article's author
                 User user = new User();
-                user = UserRepository.findById(id_user);
+                user = userDao.findById(id_user);
 
                 // Read the tag list of the article
                 List<Tag> tags = new ArrayList<>();
-                tags = TagRepository.findAllInArticle(id);
+                tags = tagDao.findAllInArticle(id);
 
                 articles.add(new Article(id, title, content, image, published, user, tags));
 
