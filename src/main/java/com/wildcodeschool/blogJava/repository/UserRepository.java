@@ -1,7 +1,7 @@
 package com.wildcodeschool.blogJava.repository;
 
 import com.wildcodeschool.blogJava.config.AppConfig;
-import com.wildcodeschool.blogJava.dao.CrudDao;
+import com.wildcodeschool.blogJava.dao.UserDao;
 import com.wildcodeschool.blogJava.model.User;
 import org.springframework.stereotype.Repository;
 import com.wildcodeschool.blogJava.util.JdbcUtils;
@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.List;
 
 @Repository
-public class UserRepository implements CrudDao<User> {
+public class UserRepository implements UserDao{
 
     // private final static String DB_URL =
     // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
@@ -20,16 +20,9 @@ public class UserRepository implements CrudDao<User> {
     @Autowired
     private AppConfig config;
 
-
-    @Override
-    public User save(User entity) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     @Override
     public User findById(Long id) {
-        // TODO Auto-generated method stub
+
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -51,11 +44,15 @@ public class UserRepository implements CrudDao<User> {
                 user.userName(userName);
                 user.firstName(firstName);
                 user.lastName(lastName);
+            } else {
+                user = new User((long) 1, "toto", "firstName", "lastName");
             }
 
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.out.println("NullPointerException");
         } finally {
             JdbcUtils.closeResultSet(resultSet);
             JdbcUtils.closeStatement(statement);
@@ -72,14 +69,20 @@ public class UserRepository implements CrudDao<User> {
     }
 
     @Override
-    public User update(User entity) {
+    public void deleteById(Long id) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public User create() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void deleteById(Long id) {
+    public User update() {
         // TODO Auto-generated method stub
-
+        return null;
     }
 }

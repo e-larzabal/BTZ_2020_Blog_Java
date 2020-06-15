@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.wildcodeschool.blogJava.config.AppConfig;
 import com.wildcodeschool.blogJava.dao.UserDao;
-import com.wildcodeschool.blogJava.dao.CrudDao;
+import com.wildcodeschool.blogJava.dao.ArticleDao;
 import com.wildcodeschool.blogJava.dao.TagDao;
 import com.wildcodeschool.blogJava.model.Article;
 import com.wildcodeschool.blogJava.model.Tag;
@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ArticleRepository implements CrudDao<Article> {
+public class ArticleRepository implements ArticleDao {
 
     // private final static String DB_URL =
     // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
@@ -30,9 +30,12 @@ public class ArticleRepository implements CrudDao<Article> {
 
     @Autowired
     private AppConfig config;
-    private UserDao userDao;
-    private TagDao tagDao;
 
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private TagDao tagDao;
 
     @Override
     public List<Article> findAll() {
@@ -71,6 +74,8 @@ public class ArticleRepository implements CrudDao<Article> {
 
             }
 
+            return articles;
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -78,24 +83,6 @@ public class ArticleRepository implements CrudDao<Article> {
             JdbcUtils.closeStatement(statement);
             JdbcUtils.closeConnection(connection);
         }
-        return null;
-    }
-
-    @Override
-    public Article save(Article entity) {
-        // TODO Auto-generated method stub
-
-        try {
-
-        } catch (Exception e) {
-            // TODO: handle exception
-        } finally {
-            // JdbcUtils.closeResultSet(resultSet);
-            // JdbcUtils.closeStatement(statement);
-            // JdbcUtils.closeConnection(connection);
-            // }
-        }
-
         return null;
     }
 
@@ -111,20 +98,27 @@ public class ArticleRepository implements CrudDao<Article> {
             // JdbcUtils.closeStatement(statement);
             // JdbcUtils.closeConnection(connection);
         }
+
         return null;
 
-    }
-
-    @Override
-    public Article update(Article entity) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
     public void deleteById(Long id) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public Article create() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Article update() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
@@ -30,7 +33,7 @@ public class ArticleController {
         return TEMPLATE_HOME;
     }
 
-    @GetMapping("/article/{id}")
+    @GetMapping("/articles/{id}")
     public String getArticle(Model model, @PathVariable Long id) {
 
         Article article = crudDao.findById(id);
@@ -41,6 +44,33 @@ public class ArticleController {
         model.addAttribute("article", article);
 
         return TEMPLATE_ARTICLE;
+    }
+
+    @PostMapping("/articles")
+    public String saveArticle(Model model, @ModelAttribute Article article) {
+
+        if (article.getId() == null) {
+            crudDao.create();
+        } else {
+            crudDao.update();
+        }
+
+        model.addAttribute("article", article);
+
+        return "redirect:" + TEMPLATE_ARTICLE + "/" + article.getId();
+    }
+
+    // @PutMapping("/articles/{id}")
+    // public String updateArticle(@PathVariable Long id){
+
+    // }
+
+    @DeleteMapping("/articles/{id}")
+    public String deleteArticle(Model model, @PathVariable Long id) {
+
+        crudDao.deleteById(id);
+
+        return "redirect:" + TEMPLATE_HOME;
     }
 
 }
