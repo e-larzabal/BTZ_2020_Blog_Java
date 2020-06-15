@@ -17,10 +17,11 @@ public class UserRepository {
     // private final static String DB_PASSWORD = "egh5ohCuey0o";
     @Autowired
     private static AppConfig config;
+
     /*
      * A user by his id
      */
-    public static User findById(Integer id) {
+    public static User findById(Long id) {
 
         Connection connection = null;
         PreparedStatement statement = null;
