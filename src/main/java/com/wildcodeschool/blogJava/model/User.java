@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class User {
 
-    private Integer id;
+    private Long id;
     private String userName;
     private String firstName;
     private String lastName;
@@ -13,18 +13,18 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String userName, String firstName, String lastName) {
+    public User(Long id, String userName, String firstName, String lastName) {
         this.id = id;
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User id(Integer id) {
+    public User id(Long id) {
         this.id = id;
         return this;
     }

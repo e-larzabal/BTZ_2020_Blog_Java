@@ -1,15 +1,84 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org/" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Charlie's Blog</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Blog Home - Start Bootstrap Template</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+
+  <!-- Custom styles for this template -->
+  <link href="../static/css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
+
 </head>
 
 <body>
 
-    <h1>Coucou</h1>
+  <!-- Navigation -->
+  <div th:insert="fragments/header :: header" >Header / Navbar</div>
 
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+
+        <h1 class="my-4">Page Heading
+          <small>Secondary Text</small>
+        </h1>
+
+        <!-- Blog Article -->
+        <div th:insert="fragments/blog-article :: blog-article" >Blog Article</div>
+
+
+        <!-- Blog Article -->
+        <div th:insert="fragments/blog-article :: blog-article" >Blog Article</div>
+
+
+        <!-- Blog Article -->
+        <div th:insert="fragments/blog-article :: blog-article" >Blog Article</div>
+
+
+        <!-- Pagination -->
+        <div th:insert="fragments/pagination :: pagination" >Pagination</div>
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Search Widget -->
+        <div th:insert="fragments/search-widget :: search-widget" >Search Widget</div>
+
+        <!-- Categories Widget -->
+        <div th:insert="fragments/categories-widget :: categories-widget" >Categories Widget</div>
+        
+        <!-- Side Widget -->
+        <div th:insert="fragments/widget :: widget" >Widget</div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <div th:insert="fragments/footer :: footer" >Footer</div>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../static/vendor/jquery/jquery.min.js" th:href="@{/vendor/jquery/jquery.min.css}"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js" th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 

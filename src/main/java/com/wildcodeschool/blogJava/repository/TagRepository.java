@@ -26,7 +26,7 @@ public class TagRepository {
     @Autowired
     private static AppConfig config;
 
-    public static List<Tag> findAllInArticle(Integer id_article) {
+    public static List<Tag> findAllInArticle(Long id_article) {
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -43,7 +43,7 @@ public class TagRepository {
 
             // TODO : fix color
             while (resultSet.next()) {
-                Integer id = resultSet.getInt("id");
+                Long id = resultSet.getLong("id");
                 String tagName = resultSet.getString("tagName");
                 Color color = null;// resultSet.getColor("color");
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Article {
 
-    private Integer id;
+    private Long id;
     private String title;
     private String content;
     private String image;
@@ -16,7 +16,7 @@ public class Article {
 
     public Article() {}
 
-    public Article(Integer id, String title, String content, String image, Date published, User user, List<Tag> listTag) { 
+    public Article(Long id, String title, String content, String image, Date published, User user, List<Tag> listTag) { 
         this.id = id;
         this.title = title;
         this.content = content;
@@ -26,11 +26,11 @@ public class Article {
         this.listTag = listTag;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -5,24 +5,24 @@ import java.awt.Color;
 
 public class Tag {
 
-    private Integer id;
+    private Long id;
     private String tagName;
     private Color color;
 
     public Tag() {
     }
 
-    public Tag(Integer id, String tagName, Color color) {
+    public Tag(Long id, String tagName, Color color) {
         this.id = id;
         this.tagName = tagName;
         this.color = color;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class Tag {
         this.color = color;
     }
 
-    public Tag id(Integer id) {
+    public Tag id(Long id) {
         this.id = id;
         return this;
     }
