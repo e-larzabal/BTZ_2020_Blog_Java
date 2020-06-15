@@ -1,18 +1,22 @@
 package com.wildcodeschool.blogJava.repository;
 
+import com.wildcodeschool.blogJava.config.AppConfig;
 import com.wildcodeschool.blogJava.model.User;
 import org.springframework.stereotype.Repository;
-import util.JdbcUtils;
+import com.wildcodeschool.blogJava.util.JdbcUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.*;
 
 @Repository
 public class UserRepository {
 
-    private final static String DB_URL = "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
-    private final static String DB_USER = "root";
-    private final static String DB_PASSWORD = "egh5ohCuey0o";
-
+    // private final static String DB_URL =
+    // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
+    // private final static String DB_USER = "root";
+    // private final static String DB_PASSWORD = "egh5ohCuey0o";
+    @Autowired
+    private static AppConfig config;
     /*
      * A user by his id
      */
@@ -23,7 +27,7 @@ public class UserRepository {
         ResultSet resultSet = null;
 
         try {
-            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            connection = JdbcUtils.getConnection(config.mysql);
             statement = connection.prepareStatement("SELECT id, userName, firstName, lastName FROM user WHERE id = ?;");
             statement.setLong(1, id);
             resultSet = statement.executeQuery();
