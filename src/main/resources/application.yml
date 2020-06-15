@@ -4,7 +4,7 @@ spring:
   profiles: prod
 
 server:
-  port: 8081
+  port: 8080
 
 mysql:
   url: ${APP_URL}
@@ -21,6 +21,6 @@ server:
   port: 8080
 
 mysql:
-  url: "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA_TEST?serverTimezone=GMT"
+  url: "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT"
   username: root
   password: egh5ohCuey0o

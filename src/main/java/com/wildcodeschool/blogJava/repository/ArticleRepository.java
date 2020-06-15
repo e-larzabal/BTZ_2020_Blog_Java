@@ -33,7 +33,6 @@ public class ArticleRepository implements CrudDao<Article> {
     private UserDao userDao;
     private TagDao tagDao;
 
-
     @Override
     public List<Article> findAll() {
         Connection connection = null;
@@ -82,24 +81,6 @@ public class ArticleRepository implements CrudDao<Article> {
     }
 
     @Override
-    public Article save(Article entity) {
-        // TODO Auto-generated method stub
-
-        try {
-
-        } catch (Exception e) {
-            // TODO: handle exception
-        } finally {
-            // JdbcUtils.closeResultSet(resultSet);
-            // JdbcUtils.closeStatement(statement);
-            // JdbcUtils.closeConnection(connection);
-            // }
-        }
-
-        return null;
-    }
-
-    @Override
     public Article findById(Long id) {
 
         try {
@@ -116,15 +97,21 @@ public class ArticleRepository implements CrudDao<Article> {
     }
 
     @Override
-    public Article update(Article entity) {
+    public void deleteById(Long id) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public Article create() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void deleteById(Long id) {
+    public Article update() {
         // TODO Auto-generated method stub
-
+        return null;
     }
 
 }

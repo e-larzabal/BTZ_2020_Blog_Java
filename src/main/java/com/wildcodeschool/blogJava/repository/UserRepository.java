@@ -20,13 +20,6 @@ public class UserRepository implements CrudDao<User> {
     @Autowired
     private AppConfig config;
 
-
-    @Override
-    public User save(User entity) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
     @Override
     public User findById(Long id) {
         // TODO Auto-generated method stub
@@ -72,14 +65,20 @@ public class UserRepository implements CrudDao<User> {
     }
 
     @Override
-    public User update(User entity) {
+    public void deleteById(Long id) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public User create() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void deleteById(Long id) {
+    public User update() {
         // TODO Auto-generated method stub
-
+        return null;
     }
 }
