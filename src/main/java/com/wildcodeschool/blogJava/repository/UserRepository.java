@@ -1,7 +1,7 @@
 package com.wildcodeschool.blogJava.repository;
 
 import com.wildcodeschool.blogJava.config.AppConfig;
-import com.wildcodeschool.blogJava.dao.CrudDao;
+import com.wildcodeschool.blogJava.dao.UserDao;
 import com.wildcodeschool.blogJava.model.User;
 import org.springframework.stereotype.Repository;
 import com.wildcodeschool.blogJava.util.JdbcUtils;
@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.List;
 
 @Repository
-public class UserRepository implements CrudDao<User> {
+public class UserRepository implements UserDao{
 
     // private final static String DB_URL =
     // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";

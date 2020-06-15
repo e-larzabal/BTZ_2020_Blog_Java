@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.wildcodeschool.blogJava.config.AppConfig;
 import com.wildcodeschool.blogJava.dao.UserDao;
-import com.wildcodeschool.blogJava.dao.CrudDao;
+import com.wildcodeschool.blogJava.dao.ArticleDao;
 import com.wildcodeschool.blogJava.dao.TagDao;
 import com.wildcodeschool.blogJava.model.Article;
 import com.wildcodeschool.blogJava.model.Tag;
@@ -21,20 +21,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ArticleRepository implements CrudDao<Article> {
+public class ArticleRepository implements ArticleDao {
 
     // private final static String DB_URL =
     // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
     // private final static String DB_USER = "root";
     // private final static String DB_PASSWORD = "egh5ohCuey0o";
 
-    @Autowired(required = false)
+    @Autowired
     private AppConfig config;
 
-    @Autowired(required = false)
+    @Autowired
     private UserDao userDao;
 
-    @Autowired(required = false)
+    @Autowired
     private TagDao tagDao;
 
     @Override
@@ -74,6 +74,8 @@ public class ArticleRepository implements CrudDao<Article> {
 
             }
 
+            return articles;
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -96,6 +98,7 @@ public class ArticleRepository implements CrudDao<Article> {
             // JdbcUtils.closeStatement(statement);
             // JdbcUtils.closeConnection(connection);
         }
+
         return null;
 
     }
