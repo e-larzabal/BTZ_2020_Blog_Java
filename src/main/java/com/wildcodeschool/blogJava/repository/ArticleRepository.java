@@ -28,7 +28,7 @@ public class ArticleRepository implements CrudDao<Article> {
     // private final static String DB_PASSWORD = "egh5ohCuey0o";
 
     @Autowired
-    private AppConfig config;
+    private static AppConfig config;
 
     @Override
     public List<Article> findAll() {
