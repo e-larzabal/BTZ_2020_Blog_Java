@@ -28,9 +28,13 @@ public class ArticleRepository implements CrudDao<Article> {
     // private final static String DB_USER = "root";
     // private final static String DB_PASSWORD = "egh5ohCuey0o";
 
-    @Autowired
+    @Autowired(required = false)
     private AppConfig config;
+
+    @Autowired(required = false)
     private UserDao userDao;
+
+    @Autowired(required = false)
     private TagDao tagDao;
 
     @Override

@@ -22,7 +22,7 @@ public class UserRepository implements CrudDao<User> {
 
     @Override
     public User findById(Long id) {
-        // TODO Auto-generated method stub
+
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -44,11 +44,15 @@ public class UserRepository implements CrudDao<User> {
                 user.userName(userName);
                 user.firstName(firstName);
                 user.lastName(lastName);
+            } else {
+                user = new User((long) 1, "toto", "firstName", "lastName");
             }
 
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (NullPointerException e) {
+            System.out.println("NullPointerException");
         } finally {
             JdbcUtils.closeResultSet(resultSet);
             JdbcUtils.closeStatement(statement);

@@ -4,6 +4,4 @@ import com.wildcodeschool.blogJava.model.User;
 
 public interface UserDao extends CrudDao<User> {
 
-	
-    
 }
