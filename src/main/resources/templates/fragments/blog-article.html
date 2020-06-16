@@ -4,7 +4,7 @@
     <div class="card-body">
         <h2 class="card-title" th:text="${art.title}">Article Title</h2>
         <p class="card-text" th:text="${#strings.abbreviate(art.content,150)}">Lolololol !!!</p>
-        <a href="#" class="btn btn-primary">Read More &rarr;</a>
+        <a th:href="@{/articles/{id}(id = ${art.id})}" class="btn btn-primary">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted" th:text="| Posted : ${art.published} by ${art.user.lastName} |">
         Posted on January 1, 2017 by
