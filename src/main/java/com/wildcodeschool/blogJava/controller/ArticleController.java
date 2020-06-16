@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,7 +20,7 @@ public class ArticleController {
 
     private static final String TEMPLATE_HOME = "index";
     private static final String TEMPLATE_ARTICLE = "article";
-    // private static final String TEMPLATE_ARTICLE_EDIT = "article-edit";
+    private static final String TEMPLATE_ARTICLE_EDIT = "article-edit";
 
     @Autowired
     private ArticleDao articleDao;
@@ -43,6 +44,16 @@ public class ArticleController {
         model.addAttribute("article", article);
 
         return TEMPLATE_ARTICLE;
+    }
+
+    @GetMapping("/edit-article")
+    public String getArticleFormulaire(Model model) {
+
+        // model.addAttribute("edit-article");
+
+        model.addAttribute("art", new Article());
+
+        return TEMPLATE_ARTICLE_EDIT;
     }
 
     @PostMapping("/articles")
