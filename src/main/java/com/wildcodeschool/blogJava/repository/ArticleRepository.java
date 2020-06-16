@@ -89,18 +89,46 @@ public class ArticleRepository implements ArticleDao {
     @Override
     public Article findById(Long id) {
 
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
         try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("SELECT a.id, a.title, a.content, a.image, a.published, a.id_user "
+                                                  + "  FROM article AS a WHERE id = ? ;                            ");
+            statement.setLong(1,id);
+            resultSet = statement.executeQuery();
 
-        } catch (Exception e) {
+            if (resultSet.next()) {
 
+                // Read the article
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                String image = resultSet.getString("image");
+                Date published = resultSet.getDate("published");
+                Long idUser = resultSet.getLong("id_user");
+
+                // Read the article's author
+                User user = new User();
+                user = userDao.findById(idUser);
+
+                // Read the tag list of the article
+                List<Tag> tags = new ArrayList<>();
+                tags = tagDao.findAllInArticle(id);
+
+                return new Article (id, title, content, image, published, user, tags);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
-            // JdbcUtils.closeResultSet(resultSet);
-            // JdbcUtils.closeStatement(statement);
-            // JdbcUtils.closeConnection(connection);
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
         }
 
         return null;
-
     }
 
     @Override
