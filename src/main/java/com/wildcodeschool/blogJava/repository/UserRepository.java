@@ -93,8 +93,22 @@ public class UserRepository implements UserDao {
 
     @Override
     public void deleteById(Long id) {
-        // TODO Auto-generated method stub
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("DELETE FROM user WHERE id = ?;");
+            statement.setLong(1, id);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
     }
 
     @Override
