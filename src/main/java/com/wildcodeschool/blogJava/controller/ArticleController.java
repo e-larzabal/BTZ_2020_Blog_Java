@@ -1,6 +1,7 @@
 package com.wildcodeschool.blogJava.controller;
 
 import com.wildcodeschool.blogJava.dao.ArticleDao;
+import com.wildcodeschool.blogJava.dao.TagDao;
 import com.wildcodeschool.blogJava.model.Article;
 
 import com.wildcodeschool.blogJava.model.Tag;
@@ -22,6 +23,8 @@ public class ArticleController {
 
     @Autowired
     private ArticleDao articleDao;
+    @Autowired
+    private TagDao tagDao;
 
     @GetMapping({ "/", "/articles" })
     public String getHome(Model model) {
@@ -57,7 +60,8 @@ public class ArticleController {
 
         model.addAttribute("art", new Article());
         model.addAttribute("user", user);
-        model.addAttribute("tag", tag);
+
+        model.addAttribute("tags", tagDao.findAll());
 
         return TEMPLATE_ARTICLE_EDIT;
     }
