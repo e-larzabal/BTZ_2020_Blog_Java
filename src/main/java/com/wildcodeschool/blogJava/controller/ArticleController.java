@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,8 +48,6 @@ public class ArticleController {
     @GetMapping("/edit-article")
     public String getArticleFormulaire(Model model) {
 
-        // model.addAttribute("edit-article");
-
         model.addAttribute("art", new Article());
 
         return TEMPLATE_ARTICLE_EDIT;
@@ -60,20 +57,15 @@ public class ArticleController {
     public String saveArticle(Model model, @ModelAttribute Article article) {
 
         if (article.getId() == null) {
-            articleDao.create();
+            articleDao.create(article);
         } else {
-            articleDao.update();
+            articleDao.update(article);
         }
 
         model.addAttribute("article", article);
 
         return "redirect:" + TEMPLATE_ARTICLE + "/" + article.getId();
     }
-
-    // @PutMapping("/articles/{id}")
-    // public String updateArticle(@PathVariable Long id){
-
-    // }
 
     @DeleteMapping("/articles/{id}")
     public String deleteArticle(Model model, @PathVariable Long id) {

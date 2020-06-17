@@ -8,15 +8,12 @@ import com.wildcodeschool.blogJava.util.JdbcUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserRepository implements UserDao{
+public class UserRepository implements UserDao {
 
-    // private final static String DB_URL =
-    // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
-    // private final static String DB_USER = "root";
-    // private final static String DB_PASSWORD = "egh5ohCuey0o";
     @Autowired
     private AppConfig config;
 
@@ -44,15 +41,11 @@ public class UserRepository implements UserDao{
                 user.userName(userName);
                 user.firstName(firstName);
                 user.lastName(lastName);
-            } else {
-                user = new User((long) 1, "toto", "firstName", "lastName");
             }
 
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NullPointerException e) {
-            System.out.println("NullPointerException");
         } finally {
             JdbcUtils.closeResultSet(resultSet);
             JdbcUtils.closeStatement(statement);
@@ -64,25 +57,124 @@ public class UserRepository implements UserDao{
 
     @Override
     public List<User> findAll() {
-        // TODO Auto-generated method stub
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("SELECT id, userName, firstName, lastName FROM user");
+            resultSet = statement.executeQuery();
+
+            List<User> users = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String userName = resultSet.getString("userName");
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+
+                users.add(new User(id, userName, firstName, lastName));
+            }
+
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+
         return null;
     }
 
     @Override
     public void deleteById(Long id) {
-        // TODO Auto-generated method stub
 
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("DELETE FROM user WHERE id = ?;");
+            statement.setLong(1, id);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
     }
 
     @Override
-    public User create() {
-        // TODO Auto-generated method stub
+    public User create(User user) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("INSERT INTO user (userName, firstName, lastName) VALUES (?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, user.getUserName());
+            statement.setString(2, user.getFirstName());
+            statement.setString(3, user.getLastName());
+
+            resultSet = statement.getGeneratedKeys();
+
+            if (resultSet.next()) {
+                Long id = resultSet.getLong(1);
+                user.setId(id);
+                return user;
+            } else {
+                throw new SQLException("failed to get insert id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+
         return null;
     }
 
     @Override
-    public User update() {
-        // TODO Auto-generated method stub
+    public User update(User user) {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("UPDATE user SET userName=?, firstName=?, lastName=? WHERE id=?");
+            statement.setString(1, user.getUserName());
+            statement.setString(2, user.getFirstName());
+            statement.setString(3, user.getLastName());
+            statement.setLong(4, user.getId());
+
+            resultSet = statement.getGeneratedKeys();
+
+            return user;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+
         return null;
     }
+
 }
