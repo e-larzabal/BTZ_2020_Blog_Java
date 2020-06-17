@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Post - Start Bootstrap Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+        th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/blog-article-formulaire.css" rel="stylesheet" th:href="@{/css/blog-article.css}">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <div th:insert="fragments/header :: header">Header / Navbar</div>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- form -->
+                <form action="/articles" method="post">
+                    <input th:value="${art.id}" name="id" type="hidden">
+                    <label for="art-title">Title :</label>
+                    <input th:value="${art.title}" id="art-title" name="Title" placeholder="LE TITRE" required
+                        type="text">
+                    <br><br>
+                    <label for="art-content">Content:</label>
+                    <input th:value="${art.content}" id="art-content" name="content" placeholder="Votre contenu"
+                        required type="text">
+                    <br><br>
+                    <label for="art-published">Date:</label>
+                    <input th:value="${art.published}" id="art-published" name="published" placeholder="1980-07-31"
+                        required type="date">
+                    <br><br>
+                    <!--                        
+                        <label for="art-birth-place">Birth Place:</label>
+                        <input th:value="${art.birthPlace}" id="art-birth-place" name="birthPlace" placeholder="London"
+                        required type="text">
+                        <br><br>
+                        <label for="art-biography">Biography:</label>
+                        <textarea th:text="${art.biography}" id="art-biography" name="biography"></textarea>
+                        <br><br>
+                        <label for="art-is-muggle">Is Muggle ?</label>
+                        <input th:checked="${art.muggle}" id="art-is-muggle" name="muggle" type="checkbox" value="true">
+                        <br><br>
+                    -->
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Search Widget -->
+                <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
+
+                <!-- Categories Widget -->
+                <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget</div>
+
+                <!-- Side Widget -->
+                <div th:insert="fragments/widget :: widget">Widget</div>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div th:insert="fragments/footer :: footer">Footer</div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/vendor/jquery/jquery.min.js" th:href="@{/vendor/jquery/jquery.min.css}"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"
+        th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

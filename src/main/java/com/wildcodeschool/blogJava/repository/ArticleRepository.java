@@ -116,6 +116,7 @@ public class ArticleRepository implements ArticleDao {
                 User user = new User();
                 user = userDao.findById(id_user);
 
+
                 // Read the tag list of the article
                 List<Tag> tags = new ArrayList<>();
                 tags = tagDao.findAllInArticle(id);
@@ -140,7 +141,6 @@ public class ArticleRepository implements ArticleDao {
         }
 
         return null;
-
     }
 
     @Override

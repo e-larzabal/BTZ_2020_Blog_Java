@@ -35,17 +35,9 @@
           <small>Secondary Text</small>
         </h1>
 
-        <!-- Blog Article -->
-        <div th:insert="fragments/blog-article :: blog-article" >Blog Article</div>
-
-
-        <!-- Blog Article -->
-        <div th:insert="fragments/blog-article :: blog-article" >Blog Article</div>
-
-
-        <!-- Blog Article -->
-        <div th:insert="fragments/blog-article :: blog-article" >Blog Article</div>
-
+        <section th:each="art : ${articles}">
+          <div th:insert="fragments/blog-article :: blog-article">Blog Article</div>
+        </section>
 
         <!-- Pagination -->
         <div th:insert="fragments/pagination :: pagination" >Pagination</div>
