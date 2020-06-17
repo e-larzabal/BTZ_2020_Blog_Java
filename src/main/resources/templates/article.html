@@ -46,12 +46,12 @@
         <!-- Tags -->
         <tags class="ml-4 my-2">
           <span class="card-text" th:if="${article.listTag.empty}">
-                  <span class="card-text"><i>No Tags Available </i></span>
-              </span>
-              <span class="card-text" th:each="tag : ${article.listTag}">
-                  <a href="#" class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
+            <span class="card-text"><i>No Tags Available </i></span>
           </span>
-      </tags>
+          <span class="card-text" th:each="tag : ${article.listTag}">
+            <a href="#" class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
+          </span>
+        </tags>
 
 
         <!-- Date/Time -->
@@ -68,6 +68,11 @@
         <p th:text="${article.content}">le contenu de notre article</p>
 
         <hr>
+
+        <a th:href="@{/edit-article/{id}(id = ${article.id})}" class="btn btn-primary">Edit <i
+            class='fas fa-pencil-alt'></i></a>
+        <!-- TODO : delete no try !!!!!!-->
+        <a th:href="@{/delete/{id}(id = ${article.id})}" class="btn btn-danger">Delete <i class='fas fa-trash-alt'></i></a>
 
         <!-- Comments Form -->
         <!-- <div class="card my-4">
@@ -124,6 +129,7 @@
 
           </div>
         </div> -->
+        <hr>
 
       </div>
 
@@ -154,6 +160,9 @@
   <script src="../static/vendor/jquery/jquery.min.js" th:href="@{/vendor/jquery/jquery.min.css}"></script>
   <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"
     th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+  <!-- Fontawsome -->
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 </body>
 

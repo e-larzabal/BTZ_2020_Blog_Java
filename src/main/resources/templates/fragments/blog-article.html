@@ -5,16 +5,23 @@
     <!--div class="card-text" th:each="tag : ${art.tags}"-->
     <tags class="ml-4 my-1">
         <span class="card-text" th:if="${art.listTag.empty}">
-                <span class="card-text"><i>No Tags Available </i></span>
-            </span>
-            <span class="card-text" th:each="tag : ${art.listTag}">
-                <a href="#" class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
+            <span class="card-text"><i>No Tags Available </i></span>
+        </span>
+        <span class="card-text" th:each="tag : ${art.listTag}">
+            <a href="#" class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
         </span>
     </tags>
     <div class="card-body">
         <h2 class="card-title" th:text="${art.title}">Article Title</h2>
-        <p class="card-text" th:text="${#strings.abbreviate(art.content,150)}">Lolololol !!!</p>
-        <a th:href="@{/articles/{id}(id = ${art.id})}" class="btn btn-primary">Read More &rarr;</a>
+        <p class="card-text" th:text="${#strings.abbreviate(art.content,150)}">Votre contenu</p>
+        <div class="d-flex flex-nowrap"> 
+            <a th:href="@{/articles/{id}(id = ${art.id})}" class="btn btn-primary">Read More &rarr;</a>
+            <div class="ml-auto">
+                <a th:href="@{/edit-article/{id}(id = ${art.id})}" class="btn btn-primary">Edit <i class='fas fa-pencil-alt'></i></a>
+                <!-- TODO : delete no try !!!!!!-->
+                <a th:href="@{/delete/{id}(id = ${art.id})}" class="btn btn-danger">Delete <i class='fas fa-trash-alt'></i></a>
+            </div>
+        </div>
     </div>
     <div class="card-footer text-muted" th:text="| Posted : ${art.published} by ${art.user.firstName} ${art.user.lastName} |">
         Posted on January 1, 2017 by
