@@ -82,13 +82,13 @@ public class TagRepository implements TagDao {
     }
 
     @Override
-    public Tag create(Tag entity) {
+    public Tag create(Tag tag) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Tag update(Tag entity) {
+    public Tag update(Tag tag) {
         // TODO Auto-generated method stub
         return null;
     }
