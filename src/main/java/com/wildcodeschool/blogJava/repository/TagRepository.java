@@ -142,7 +142,7 @@ public class TagRepository implements TagDao {
         try {
             connection = JdbcUtils.getConnection(config.mysql);
             statement = connection.prepareStatement("SELECT id, tagName, color FROM tag "
-                    + "LEFT JOIN article_has_tag aht ON tag.id = aht.id_article " + "WHERE id = ?;");
+                    + "LEFT JOIN article_has_tag aht ON tag.id = aht.id_tag WHERE id_article = ? ;");
             statement.setLong(1, id);
             resultSet = statement.executeQuery();
 
