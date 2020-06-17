@@ -1,8 +1,6 @@
 package com.wildcodeschool.blogJava.controller;
 
 import com.wildcodeschool.blogJava.dao.ArticleDao;
-import com.wildcodeschool.blogJava.dao.TagDao;
-import com.wildcodeschool.blogJava.dao.UserDao;
 import com.wildcodeschool.blogJava.model.Article;
 
 import com.wildcodeschool.blogJava.model.Tag;
@@ -11,12 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
@@ -29,8 +22,6 @@ public class ArticleController {
 
     @Autowired
     private ArticleDao articleDao;
-    private UserDao userDao;
-    private TagDao tagDao;
 
     @GetMapping({ "/", "/articles" })
     public String getHome(Model model) {
@@ -62,15 +53,21 @@ public class ArticleController {
     }
 
     @GetMapping("/edit-article")
-    public String getTemplateArticleEdit(Model model, @ModelAttribute User user,
-                                       @ModelAttribute Tag tag) {
+    public String getTemplateArticleEdit(Model model, @ModelAttribute User user, @ModelAttribute Tag tag) {
 
         model.addAttribute("art", new Article());
-/*        if (user.getId() == null) {
-            return "redirect:" + TEMPLATE_SIGN_IN;
-        }*/
         model.addAttribute("user", user);
         model.addAttribute("tag", tag);
+
+        return TEMPLATE_ARTICLE_EDIT;
+    }
+
+    @GetMapping("/edit-article/{id}")
+    public String getTemplateArticleEditById(Model model, @ModelAttribute Article article, @PathVariable Long id) {
+
+        article = articleDao.findById(id);
+
+        model.addAttribute("art", article);
 
         return TEMPLATE_ARTICLE_EDIT;
     }

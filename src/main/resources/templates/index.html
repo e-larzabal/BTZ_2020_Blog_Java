@@ -11,7 +11,8 @@
   <title>Blog Home - Start Bootstrap Template</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+    th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
 
   <!-- Custom styles for this template -->
   <link href="../static/css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
@@ -21,7 +22,7 @@
 <body>
 
   <!-- Navigation -->
-  <div th:insert="fragments/header :: header" >Header / Navbar</div>
+  <div th:insert="fragments/header :: header">Header / Navbar</div>
 
   <!-- Page Content -->
   <div class="container">
@@ -40,7 +41,7 @@
         </section>
 
         <!-- Pagination -->
-        <div th:insert="fragments/pagination :: pagination" >Pagination</div>
+        <div th:insert="fragments/pagination :: pagination">Pagination</div>
 
       </div>
 
@@ -48,13 +49,13 @@
       <div class="col-md-4">
 
         <!-- Search Widget -->
-        <div th:insert="fragments/search-widget :: search-widget" >Search Widget</div>
+        <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
 
         <!-- Categories Widget -->
-        <div th:insert="fragments/categories-widget :: categories-widget" >Categories Widget</div>
-        
+        <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget</div>
+
         <!-- Side Widget -->
-        <div th:insert="fragments/widget :: widget" >Widget</div>
+        <div th:insert="fragments/widget :: widget">Widget</div>
 
       </div>
 
@@ -65,13 +66,16 @@
   <!-- /.container -->
 
   <!-- Footer -->
-  <div th:insert="fragments/footer :: footer" >Footer</div>
+  <div th:insert="fragments/footer :: footer">Footer</div>
 
 
   <!-- Bootstrap core JavaScript -->
   <script src="../static/vendor/jquery/jquery.min.js" th:href="@{/vendor/jquery/jquery.min.css}"></script>
-  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js" th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"
+    th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
+  <!-- Fontawsome -->
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </body>
 
 </html>
