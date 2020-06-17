@@ -93,6 +93,7 @@ public class UserRepository implements UserDao {
 
     @Override
     public void deleteById(Long id) {
+
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -112,14 +113,44 @@ public class UserRepository implements UserDao {
     }
 
     @Override
-    public User create() {
-        // TODO Auto-generated method stub
+    public User create(User user) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("INSERT INTO user (userName, firstName, lastName) VALUES (?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, user.getUserName());
+            statement.setString(2, user.getFirstName());
+            statement.setString(3, user.getLastName());
+
+            resultSet = statement.getGeneratedKeys();
+
+            if (resultSet.next()) {
+                Long id = resultSet.getLong(1);
+                user.setId(id);
+                return user;
+            } else {
+                throw new SQLException("failed to get insert id");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+
         return null;
     }
 
     @Override
-    public User update() {
+    public User update(User entity) {
         // TODO Auto-generated method stub
         return null;
     }
+
 }

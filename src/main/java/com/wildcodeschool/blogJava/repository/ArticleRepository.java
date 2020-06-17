@@ -133,13 +133,13 @@ public class ArticleRepository implements ArticleDao {
     }
 
     @Override
-    public Article create() {
+    public Article create(Article entity) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Article update() {
+    public Article update(Article entity) {
         // TODO Auto-generated method stub
         return null;
     }
