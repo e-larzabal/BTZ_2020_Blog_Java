@@ -23,11 +23,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ArticleRepository implements ArticleDao {
 
-    // private final static String DB_URL =
-    // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
-    // private final static String DB_USER = "root";
-    // private final static String DB_PASSWORD = "egh5ohCuey0o";
-
     @Autowired
     private AppConfig config;
 
@@ -96,8 +91,8 @@ public class ArticleRepository implements ArticleDao {
         try {
             connection = JdbcUtils.getConnection(config.mysql);
             statement = connection.prepareStatement("SELECT a.id, a.title, a.content, a.image, a.published, a.id_user "
-                                                  + "  FROM article AS a WHERE id = ? ;                            ");
-            statement.setLong(1,id);
+                    + "  FROM article AS a WHERE id = ? ;                            ");
+            statement.setLong(1, id);
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
@@ -117,7 +112,7 @@ public class ArticleRepository implements ArticleDao {
                 List<Tag> tags = new ArrayList<>();
                 tags = tagDao.findAllInArticle(id);
 
-                return new Article (id, title, content, image, published, user, tags);
+                return new Article(id, title, content, image, published, user, tags);
             }
 
         } catch (SQLException e) {

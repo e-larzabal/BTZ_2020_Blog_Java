@@ -8,15 +8,12 @@ import com.wildcodeschool.blogJava.util.JdbcUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserRepository implements UserDao{
+public class UserRepository implements UserDao {
 
-    // private final static String DB_URL =
-    // "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT";
-    // private final static String DB_USER = "root";
-    // private final static String DB_PASSWORD = "egh5ohCuey0o";
     @Autowired
     private AppConfig config;
 
@@ -44,15 +41,11 @@ public class UserRepository implements UserDao{
                 user.userName(userName);
                 user.firstName(firstName);
                 user.lastName(lastName);
-            } else {
-                user = new User((long) 1, "toto", "firstName", "lastName");
             }
 
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NullPointerException e) {
-            System.out.println("NullPointerException");
         } finally {
             JdbcUtils.closeResultSet(resultSet);
             JdbcUtils.closeStatement(statement);
@@ -64,7 +57,37 @@ public class UserRepository implements UserDao{
 
     @Override
     public List<User> findAll() {
-        // TODO Auto-generated method stub
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("SELECT id, userName, firstName, lastName FROM user");
+            resultSet = statement.executeQuery();
+
+            List<User> users = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Long id = resultSet.getLong("id");
+                String userName = resultSet.getString("userName");
+                String firstName = resultSet.getString("firstName");
+                String lastName = resultSet.getString("lastName");
+
+                users.add(new User(id, userName, firstName, lastName));
+            }
+
+            return users;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+
         return null;
     }
 
