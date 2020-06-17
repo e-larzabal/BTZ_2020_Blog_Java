@@ -116,7 +116,6 @@ public class ArticleRepository implements ArticleDao {
                 User user = new User();
                 user = userDao.findById(id_user);
 
-
                 // Read the tag list of the article
                 List<Tag> tags = new ArrayList<>();
                 tags = tagDao.findAllInArticle(id);
@@ -184,13 +183,12 @@ public class ArticleRepository implements ArticleDao {
                     "INSERT INTO article (content, image, published, id_user) VALUES (?, ?, ?, ?)",
                     statement.RETURN_GENERATED_KEYS
             );
-            statement.setString(1, article.getTitle());
-            statement.setString(2, article.getContent());
-            statement.setString(3, article.getImage());
-            //TODO
-            //statement.setDate(4, (java.util.Date) article.getPublished()); //convert from java.sql.Date to java.util.Date
-            //statement.setDate(4, article.getPublished());
-            statement.setLong(5, article.getUser().getId());
+
+            statement.setString(1, article.getContent());
+            statement.setString(2, article.getImage());
+            java.sql.Date datePublishedSQL = new java.sql.Date(article.getPublished().getTime()); //convert from java.util.Date to java.sql.Date
+            statement.setDate(3, datePublishedSQL);
+            statement.setLong(4, article.getUser().getId());
 
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to insert data into article");
@@ -230,8 +228,8 @@ public class ArticleRepository implements ArticleDao {
             );
             statement.setString(1, article.getContent());
             statement.setString(2, article.getImage());
-            //TODO
-            statement.setDate(3, (java.sql.Date) article.getPublished()); //convert from java.util.Date to java.sql.Date
+            java.sql.Date datePublishedSQL = new java.sql.Date(article.getPublished().getTime()); //convert from java.util.Date to java.sql.Date
+            statement.setDate(3, datePublishedSQL);
             statement.setLong(4, article.getUser().getId());
             statement.setLong(5, article.getId());
 
