@@ -49,8 +49,6 @@ public class ArticleController {
     @GetMapping("/edit-article")
     public String getArticleFormulaire(Model model) {
 
-        // model.addAttribute("edit-article");
-
         model.addAttribute("art", new Article());
 
         return TEMPLATE_ARTICLE_EDIT;
@@ -60,20 +58,15 @@ public class ArticleController {
     public String saveArticle(Model model, @ModelAttribute Article article) {
 
         if (article.getId() == null) {
-            articleDao.create();
+            articleDao.create(article);
         } else {
-            articleDao.update();
+            articleDao.update(article);
         }
 
         model.addAttribute("article", article);
 
         return "redirect:" + TEMPLATE_ARTICLE + "/" + article.getId();
     }
-
-    // @PutMapping("/articles/{id}")
-    // public String updateArticle(@PathVariable Long id){
-
-    // }
 
     @DeleteMapping("/articles/{id}")
     public String deleteArticle(Model model, @PathVariable Long id) {
