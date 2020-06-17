@@ -55,7 +55,7 @@ public class TagRepository implements TagDao {
         try {
             connection = JdbcUtils.getConnection(config.mysql);
             statement = connection.prepareStatement("SELECT id, tagName, color FROM tag "
-                    + "LEFT JOIN article_has_tag aht ON tag.id = aht.id_article " + "WHERE id = ?;");
+                    + "LEFT JOIN article_has_tag aht ON tag.id = aht.id_tag WHERE id_article = ? ;");
             statement.setLong(1, id);
             resultSet = statement.executeQuery();
 
@@ -65,7 +65,7 @@ public class TagRepository implements TagDao {
             while (resultSet.next()) {
                 Long idTag = resultSet.getLong("id");
                 String tagName = resultSet.getString("tagName");
-                Color color = null;// resultSet.getColor("color");
+                Color color = new Color(resultSet.getInt("color"));
 
                 tags.add(new Tag(idTag, tagName, color));
             }
