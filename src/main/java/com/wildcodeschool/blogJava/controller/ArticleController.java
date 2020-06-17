@@ -50,9 +50,9 @@ public class ArticleController {
     public String saveArticle(Model model, @ModelAttribute Article article) {
 
         if (article.getId() == null) {
-            crudDao.create();
+            crudDao.create(article);
         } else {
-            crudDao.update();
+            crudDao.update(article);
         }
 
         model.addAttribute("article", article);

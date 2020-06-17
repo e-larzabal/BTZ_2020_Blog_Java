@@ -75,13 +75,13 @@ public class UserRepository implements UserDao{
     }
 
     @Override
-    public User create() {
+    public User create(User user) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public User update() {
+    public User update(User user) {
         // TODO Auto-generated method stub
         return null;
     }
