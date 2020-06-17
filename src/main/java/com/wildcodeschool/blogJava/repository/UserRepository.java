@@ -148,8 +148,32 @@ public class UserRepository implements UserDao {
     }
 
     @Override
-    public User update(User entity) {
-        // TODO Auto-generated method stub
+    public User update(User user) {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("UPDATE user SET userName=?, firstName=?, lastName=? WHERE id=?");
+            statement.setString(1, user.getUserName());
+            statement.setString(2, user.getFirstName());
+            statement.setString(3, user.getLastName());
+            statement.setLong(4, user.getId());
+
+            resultSet = statement.getGeneratedKeys();
+
+            return user;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+
         return null;
     }
 
