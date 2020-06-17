@@ -41,7 +41,7 @@ public class ArticleController {
     }
 
     @GetMapping("/articles/{id}")
-    public String getArticle(Model model, @PathVariable Long id) {
+    public String getTemplateArticle(Model model, @PathVariable Long id) {
 
         Article article = articleDao.findById(id);
 
@@ -62,13 +62,13 @@ public class ArticleController {
     }
 
     @GetMapping("/edit-article")
-    public String getArticleFormulaire(Model model, @ModelAttribute User user,
+    public String getTemplateArticleEdit(Model model, @ModelAttribute User user,
                                        @ModelAttribute Tag tag) {
 
         model.addAttribute("art", new Article());
-        if (user.getId() == null) {
+/*        if (user.getId() == null) {
             return "redirect:" + TEMPLATE_SIGN_IN;
-        }
+        }*/
         model.addAttribute("user", user);
         model.addAttribute("tag", tag);
 

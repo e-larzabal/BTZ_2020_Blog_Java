@@ -15,7 +15,7 @@
           th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
+    <link href="../static/css/blog-sign-in.css" rel="stylesheet" th:href="@{/css/blog-sign-in.css}">
 
 </head>
 
@@ -25,26 +25,30 @@
 <div th:insert="fragments/header :: header">Header / Navbar</div>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container col-6 align-content-center my-4">
     <div class="card my-4">
         <h5 class="card-header">Sign In</h5>
         <div class="card-body">
             <form action="/articles" method="post">
-                <!--ArticleId is hidden-->
+                <!--UserId is hidden-->
                 <input th:value="${user.id}" name="id" type="hidden">
-                <!--ArticleTitle is required-->
+                <!--UserName is required-->
                 <div class="form-group">
-                    <div class="form-row align-items-center">
-                        <div class="col-auto my-1">
-                            <label for="art-title">UserName</label>
-                        </div>
-                        <div class="col my-1">
-                            <input th:value="${user.userName}" class="form-control"
-                                   id="art-title"
-                                   name="art-title" placeholder="" required
-                                   type="text">
-                        </div>
-                    </div>
+                    <label for="user-username">UserName</label>
+                    <input th:value="${user.userName}" class="form-control"
+                           id="user-username"
+                           name="user-username"
+                           required
+                           type="text">
+                </div>
+                <!--User Password is required-->
+                <div class="form-group">
+                    <label for="user-password">Password</label>
+                    <input class="form-control"
+                           id="user-password"
+                           name="user-password"
+                           required
+                           type="text">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
