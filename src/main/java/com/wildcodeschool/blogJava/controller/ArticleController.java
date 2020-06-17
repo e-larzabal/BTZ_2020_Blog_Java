@@ -1,12 +1,17 @@
 package com.wildcodeschool.blogJava.controller;
 
 import com.wildcodeschool.blogJava.dao.ArticleDao;
+import com.wildcodeschool.blogJava.dao.TagDao;
+import com.wildcodeschool.blogJava.dao.UserDao;
 import com.wildcodeschool.blogJava.model.Article;
 
+import com.wildcodeschool.blogJava.model.Tag;
+import com.wildcodeschool.blogJava.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,9 +25,12 @@ public class ArticleController {
     private static final String TEMPLATE_HOME = "index";
     private static final String TEMPLATE_ARTICLE = "article";
     private static final String TEMPLATE_ARTICLE_EDIT = "article-edit";
+    private static final String TEMPLATE_SIGN_IN = "sign-in";
 
     @Autowired
     private ArticleDao articleDao;
+    private UserDao userDao;
+    private TagDao tagDao;
 
     @GetMapping({ "/", "/articles" })
     public String getHome(Model model) {
@@ -33,7 +41,7 @@ public class ArticleController {
     }
 
     @GetMapping("/articles/{id}")
-    public String getArticle(Model model, @PathVariable Long id) {
+    public String getTemplateArticle(Model model, @PathVariable Long id) {
 
         Article article = articleDao.findById(id);
 
@@ -45,10 +53,24 @@ public class ArticleController {
         return TEMPLATE_ARTICLE;
     }
 
+    @GetMapping("/sign-in")
+    public String getTemplateSignIn(Model model, @ModelAttribute User user) {
+
+        model.addAttribute("user", user);
+
+        return TEMPLATE_SIGN_IN;
+    }
+
     @GetMapping("/edit-article")
-    public String getArticleFormulaire(Model model) {
+    public String getTemplateArticleEdit(Model model, @ModelAttribute User user,
+                                       @ModelAttribute Tag tag) {
 
         model.addAttribute("art", new Article());
+/*        if (user.getId() == null) {
+            return "redirect:" + TEMPLATE_SIGN_IN;
+        }*/
+        model.addAttribute("user", user);
+        model.addAttribute("tag", tag);
 
         return TEMPLATE_ARTICLE_EDIT;
     }
