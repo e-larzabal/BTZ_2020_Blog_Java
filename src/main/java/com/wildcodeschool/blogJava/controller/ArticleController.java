@@ -1,5 +1,7 @@
 package com.wildcodeschool.blogJava.controller;
 
+import java.util.List;
+
 import com.wildcodeschool.blogJava.dao.ArticleDao;
 import com.wildcodeschool.blogJava.model.Article;
 
@@ -31,6 +33,7 @@ public class ArticleController {
         return TEMPLATE_HOME;
     }
 
+
     @GetMapping("/articles/{id}")
     public String getTemplateArticle(Model model, @PathVariable Long id) {
 
@@ -42,6 +45,19 @@ public class ArticleController {
         model.addAttribute("article", article);
 
         return TEMPLATE_ARTICLE;
+    }
+
+    @GetMapping("/articles/tag/{idTag}")
+    public String getArticleByIdTag(Model model, @PathVariable Long idTag) {
+
+        List<Article> articles = articleDao.FindByIdTag(idTag);
+
+        if (articles == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pas d'articles avec ce Tag");
+
+        model.addAttribute("articles", articles);
+
+        return TEMPLATE_HOME;
     }
 
     @GetMapping("/sign-in")

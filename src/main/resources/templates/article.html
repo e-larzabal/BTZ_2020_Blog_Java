@@ -49,7 +49,7 @@
             <span class="card-text"><i>No Tags Available </i></span>
           </span>
           <span class="card-text" th:each="tag : ${article.listTag}">
-            <a href="#" class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
+            <a href="#" th:href="|/articles/tag/${tag.id}|" class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
           </span>
         </tags>
 
