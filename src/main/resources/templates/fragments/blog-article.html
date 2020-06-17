@@ -1,12 +1,21 @@
 <!-- Blog Article -->
 <article class="card mb-4" th:fragment="blog-article" xmlns:th="http://www.thymeleaf.org">
     <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+
+    <!--div class="card-text" th:each="tag : ${art.tags}"-->
+    <div class="card-text" th:if="${art.listTag.empty}">
+            <span class="card-text"> No Tags Available </span>
+        </div>
+        <div class="card-text" th:each="tag : ${art.listTag}">
+            <a href="#" class="badge badge-pill badge-primary mx-3" th:text="${tag.tagName}"> Tag </a>
+    </div>
+    
     <div class="card-body">
         <h2 class="card-title" th:text="${art.title}">Article Title</h2>
         <p class="card-text" th:text="${#strings.abbreviate(art.content,150)}">Lolololol !!!</p>
         <a th:href="@{/articles/{id}(id = ${art.id})}" class="btn btn-primary">Read More &rarr;</a>
     </div>
-    <div class="card-footer text-muted" th:text="| Posted : ${art.published} by ${art.user.lastName} |">
+    <div class="card-footer text-muted" th:text="| Posted : ${art.published} by ${art.user.firstName} ${art.user.lastName} |">
         Posted on January 1, 2017 by
         <a href="#">Start Bootstrap</a>
     </div>
