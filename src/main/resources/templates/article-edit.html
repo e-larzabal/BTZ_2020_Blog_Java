@@ -35,7 +35,7 @@
             <div class="card my-4">
                 <h5 class="card-header">Create your article</h5>
                 <div class="card-body">
-                    <form action="/articles" method="post">
+                    <form th:action="@{/articles}" method="post">
                         <!--ArticleId is hidden-->
                         <input th:value="${art.id}" name="id" type="hidden">
                         <!--ArticleTitle is required-->
@@ -83,7 +83,7 @@
                                 <div class="col">
                                     <input th:value="${art.image}" class="form-control"
                                            id="art-image"
-                                           alt="your image" src="image" type="image">
+                                           alt="your image" type="url">
                                 </div>
                             </div>
                         </div>
@@ -119,35 +119,6 @@
                     </form>
                 </div>
             </div>
-            <!-- form -->
-            <!--                <form action="/articles" method="post">
-                            <input th:value="${art.id}" name="id" type="hidden">
-                            <label for="art-title">Title :</label>
-                            <input th:value="${art.title}" id="art-title" name="Title" placeholder="LE TITRE" required
-                                type="text">
-                            <br><br>
-                            <label for="art-content">Content:</label>
-                            <input th:value="${art.content}" id="art-content" name="content" placeholder="Votre contenu"
-                                required type="text">
-                            <br><br>
-                            <label for="art-published">Date:</label>
-                            <input th:value="${art.published}" id="art-published" name="published" placeholder="1980-07-31"
-                                required type="date">
-                            <br><br>-->
-            <!--
-            <label for="art-birth-place">Birth Place:</label>
-            <input th:value="${art.birthPlace}" id="art-birth-place" name="birthPlace" placeholder="London"
-            required type="text">
-            <br><br>
-            <label for="art-biography">Biography:</label>
-            <textarea th:text="${art.biography}" id="art-biography" name="biography"></textarea>
-            <br><br>
-            <label for="art-is-muggle">Is Muggle ?</label>
-            <input th:checked="${art.muggle}" id="art-is-muggle" name="muggle" type="checkbox" value="true">
-            <br><br>
-        -->
-            <!--                    <input type="submit" value="Send">
-                        </form>-->
         </div>
 
         <!-- Sidebar Widgets Column -->
