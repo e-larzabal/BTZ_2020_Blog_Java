@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Post - Start Bootstrap Template</title>
+    <title>Create your Article</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
@@ -107,10 +107,11 @@
                         <!--ArticleContent is required-->
                         <div class="form-group">
 
-                            <label for="art-content">Content</label>
+                            <label class="mb-1" for="art-content">Content</label>
                             <textarea th:value="${art.content}" class="form-control"
                                       id="art-content"
-                                      name="art-content" placeholder="Votre contenu" required
+                                      name="art-content"
+                                      placeholder="Let your imagination run wild ..." required
                                       type="text" rows="8"
                                       maxlength="100000"></textarea>
                         </div>
