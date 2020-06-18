@@ -47,6 +47,7 @@ public class ArticleController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article inconnu");
 
         model.addAttribute("article", article);
+        model.addAttribute("listTag", tagDao.findAll());
 
         return TEMPLATE_ARTICLE;
     }
@@ -60,6 +61,7 @@ public class ArticleController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pas d'articles avec ce Tag");
 
         model.addAttribute("articles", articles);
+        model.addAttribute("listTag", tagDao.findAll());
 
         return TEMPLATE_HOME;
     }
@@ -76,6 +78,7 @@ public class ArticleController {
     public String getTemplateArticleEdit(Model model, @ModelAttribute User user, @ModelAttribute Tag tag) {
 
         model.addAttribute("article", new Article());
+        model.addAttribute("listTag", tagDao.findAll());
         // model.addAttribute("user", user);
 
         model.addAttribute("tags", tagDao.findAll());
@@ -89,6 +92,7 @@ public class ArticleController {
         article = articleDao.findById(id);
 
         model.addAttribute("article", article);
+        model.addAttribute("listTag", tagDao.findAll());
 
         model.addAttribute("tags", tagDao.findAll());
 
@@ -116,6 +120,7 @@ public class ArticleController {
         }
 
         model.addAttribute("article", article);
+        model.addAttribute("listTag", tagDao.findAll());
 
         return "redirect:" + "articles" + "/" + article.getId();
     }
