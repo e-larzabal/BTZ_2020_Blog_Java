@@ -50,17 +50,24 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--ArticleTag is required, but only one for now-->
+
+                            <!-- ArticleTag -->
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-auto m-auto">
                                         <label for="topic">Topics</label>
                                     </div>
+
                                     <div class="col">
                                         <div class="form-control" id="topic">
+                                            <!-- Ce champ est la pour éviter le cas ou aucun tag est coché -->
+                                            <input value="-1" name="tagsDeLArticle" type="hidden">
                                             <div th:each="tag : ${tags}" class="form-check form-check-inline">
+
                                                 <input class="form-check-input" type="checkbox" id="tagCheckbox"
-                                                    th:value="${tag.tagName}">
+                                                    th:value="${tag.id}" name ="tagsDeLArticle"
+                                                    th:checked="${#lists.contains(article.listTag, tag)}"
+                                                     >
                                                 <label class="form-check-label" for="tagCheckbox"
                                                     th:text="${tag.tagName}">Tag
                                                 </label>
@@ -69,6 +76,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!--ArticleImage is not required-->
                             <!--TODO: Importer les images au bon format-->
                             <div class="form-group">

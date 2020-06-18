@@ -74,7 +74,7 @@ public class ArticleController {
     public String getTemplateArticleEdit(Model model, @ModelAttribute User user, @ModelAttribute Tag tag) {
 
         model.addAttribute("article", new Article());
-        model.addAttribute("user", user);
+        //model.addAttribute("user", user);
 
         model.addAttribute("tags", tagDao.findAll());
 
@@ -88,16 +88,29 @@ public class ArticleController {
 
         model.addAttribute("article", article);
 
+        model.addAttribute("tags", tagDao.findAll());
+
         return TEMPLATE_ARTICLE_EDIT;
     }
 
     @PostMapping("/articles")
-    public String saveArticle(Model model, @ModelAttribute Article article) {
+    public String saveArticle(Model model, @ModelAttribute Article article , @RequestParam List<String> tagsDeLArticle) {
 
         if (article.getId() == null) {
             articleDao.create(article);
         } else {
             articleDao.update(article);
+
+            // on enlève les tags de l'article
+            articleDao.delAllArticleTag(article.getId());
+        }
+
+        //On parcours tous les tags cochés
+        for (String tagValue : tagsDeLArticle) {
+            if (!tagValue.equals("-1")) {
+                //si c'est <> -1 on tague cet article
+                articleDao.addArticleTag( article.getId(), Long.parseLong(tagValue));
+            } 
         }
 
         model.addAttribute("article", article);

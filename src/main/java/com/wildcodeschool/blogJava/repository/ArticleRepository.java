@@ -246,6 +246,8 @@ public class ArticleRepository implements ArticleDao {
                 throw new SQLException("failed to get inserted id of article");
             }
 
+            //insert les id_article / id_tags
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -283,6 +285,57 @@ public class ArticleRepository implements ArticleDao {
         }
 
         return null;
+    }
+
+    @Override
+    public void addArticleTag(Long idArticle, Long idTag) {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("INSERT INTO article_has_tag (id_article, id_tag) VALUES (?, ?);");
+            statement.setLong(1, idArticle);
+            statement.setLong(2, idTag);
+
+            if (statement.executeUpdate() != 1) {
+                throw new SQLException("failed to insert data");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+
+    }
+
+    @Override
+    public void delAllArticleTag(Long idArticle) {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("DELETE FROM article_has_tag WHERE id_article = ?");
+            statement.setLong(1, idArticle);
+
+            if (statement.executeUpdate() != 1) {
+                throw new SQLException("failed to delete data");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+
     }
 
 }
