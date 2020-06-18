@@ -32,6 +32,7 @@ public class ArticleController {
     public String getHome(Model model) {
 
         model.addAttribute("articles", articleDao.findAll());
+        model.addAttribute("listTag", tagDao.findAll());
 
         return TEMPLATE_HOME;
     }
