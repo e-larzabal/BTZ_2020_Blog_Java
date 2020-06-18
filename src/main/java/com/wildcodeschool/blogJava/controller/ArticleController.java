@@ -2,6 +2,7 @@ package com.wildcodeschool.blogJava.controller;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.wildcodeschool.blogJava.dao.ArticleDao;
 import com.wildcodeschool.blogJava.dao.TagDao;
 import com.wildcodeschool.blogJava.model.Article;
@@ -75,7 +76,7 @@ public class ArticleController {
     public String getTemplateArticleEdit(Model model, @ModelAttribute User user, @ModelAttribute Tag tag) {
 
         model.addAttribute("article", new Article());
-        //model.addAttribute("user", user);
+        // model.addAttribute("user", user);
 
         model.addAttribute("tags", tagDao.findAll());
 
@@ -95,7 +96,7 @@ public class ArticleController {
     }
 
     @PostMapping("/articles")
-    public String saveArticle(Model model, @ModelAttribute Article article , @RequestParam List<String> tagsDeLArticle) {
+    public String saveArticle(Model model, @ModelAttribute Article article, @RequestParam List<String> tagsDeLArticle) {
 
         if (article.getId() == null) {
             articleDao.create(article);
@@ -106,12 +107,12 @@ public class ArticleController {
             articleDao.delAllArticleTag(article.getId());
         }
 
-        //On parcours tous les tags cochés
+        // On parcours tous les tags cochés
         for (String tagValue : tagsDeLArticle) {
             if (!tagValue.equals("-1")) {
-                //si c'est <> -1 on tague cet article
-                articleDao.addArticleTag( article.getId(), Long.parseLong(tagValue));
-            } 
+                // si c'est <> -1 on tague cet article
+                articleDao.addArticleTag(article.getId(), Long.parseLong(tagValue));
+            }
         }
 
         model.addAttribute("article", article);
@@ -119,12 +120,12 @@ public class ArticleController {
         return "redirect:" + "articles" + "/" + article.getId();
     }
 
-    @DeleteMapping("/articles/{id}")
-    public String deleteArticle(Model model, @PathVariable Long id) {
+    @GetMapping("/delete-article/{id}")
+    public String deleteArticle(@PathVariable Long id) {
 
         articleDao.deleteById(id);
 
-        return "redirect:" + TEMPLATE_HOME;
+        return "redirect:" + "/";
     }
 
 }
