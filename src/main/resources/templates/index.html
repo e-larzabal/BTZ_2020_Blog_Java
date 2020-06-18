@@ -20,8 +20,8 @@
   <!-- Custom styles for this template -->
   <link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}">
   <link href="../static/css/fragments.css" rel="stylesheet" th:href="@{/css/fragments.css}">
+  <link href="../static/css/blog-article.css" rel="stylesheet" th:href="@{/css/blog-article.css}">
   <link href="../static/css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
-  <link href="../static/css/fragments.css" rel="stylesheet" th:href="@{/css/fragments.css}">
 
 </head>
 
@@ -38,9 +38,8 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Bienvenue sur mon blog
-          <small>Partageons mes passions</small>
-        </h1>
+        <h1 class="my-4">Welcome to my blog</h1>
+        <h3>Here I share my passions with you</h3>
 
         <section th:each="article : ${articles}">
           <div th:insert="fragments/blog-article :: blog-article">Blog Article</div>
