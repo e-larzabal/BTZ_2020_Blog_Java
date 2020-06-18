@@ -201,7 +201,7 @@ public class ArticleRepository implements ArticleDao {
             statement.setLong(1, id);
 
             if (statement.executeUpdate() != 1) {
-                throw new SQLException("failed to delete data");
+                throw new SQLException("failed to delete data in article table");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -233,7 +233,7 @@ public class ArticleRepository implements ArticleDao {
             statement.setLong(4, article.getUser().getId());
 
             if (statement.executeUpdate() != 1) {
-                throw new SQLException("failed to insert data into article");
+                throw new SQLException("failed to insert data into article table");
             }
 
             generatedKeys = statement.getGeneratedKeys();
@@ -265,11 +265,12 @@ public class ArticleRepository implements ArticleDao {
 
         try {
             connection = JdbcUtils.getConnection(config.mysql);
-            statement = connection.prepareStatement("UPDATE article SET content=?, image=?, id_user=? WHERE id=?");
-            statement.setString(1, article.getContent());
-            statement.setString(2, article.getImage());
-            statement.setLong(3, article.getUser().getId());
-            statement.setLong(4, article.getId());
+            statement = connection.prepareStatement("UPDATE article SET title= ?, content=?, image=?, id_user=? WHERE id=?");
+            statement.setString(1, article.getTitle());
+            statement.setString(2, article.getContent());
+            statement.setString(3, article.getImage());
+            statement.setLong(4, article.getUser().getId());
+            statement.setLong(5, article.getId());
 
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data into article");
