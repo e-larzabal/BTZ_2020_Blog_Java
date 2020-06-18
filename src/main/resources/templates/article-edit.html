@@ -8,166 +8,147 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Post - Start Bootstrap Template</title>
+    <title>Create your Article</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
-        th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+          th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/blog-article-formulaire.css" rel="stylesheet" th:href="@{/css/blog-article.css}">
+    <link href="../static/css/article-edit.css" rel="stylesheet"
+          th:href="@{/css/article-edit.css}">
 
 </head>
 
 <body>
-    <!-- Navigation -->
-    <div th:insert="fragments/header :: header">Header / Navbar</div>
+<!-- Navigation -->
+<div th:insert="fragments/header :: header">Header / Navbar</div>
 
-    <!-- Page Content -->
-    <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <!-- Post Content Column -->
-            <div class="col-lg-8">
-                <!-- Comments Form -->
-                <div class="card my-4">
-                    <h5 class="card-header">Create your article</h5>
-                    <div class="card-body">
-                        <form action="/articles" method="post">
-                            <!--ArticleId is hidden-->
-                            <input th:value="${art.id}" name="id" type="hidden">
-                            <!--ArticleTitle is required-->
-                            <div class="form-group">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-                                        <label for="art-title">Title</label>
-                                    </div>
-                                    <div class="col my-1">
-                                        <input th:value="${art.title}" class="form-control" id="art-title"
-                                            name="art-title" placeholder="Choose a title" required type="text">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Comments Form -->
+            <div class="card my-4">
+                <h5 class="card-header">Create your article</h5>
+                <div class="card-body">
+                    <form th:action="@{/articles}" method="post">
+                        <!--ArticleId is hidden-->
+                        <input th:value="${art.id}" name="id" type="hidden">
+                        <!--ArticleTitle is required-->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-auto m-auto">
+                                    <label for="art-title">Title</label>
+                                </div>
+                                <div class="col">
+                                    <input th:value="${art.title}" class="form-control"
+                                           id="art-title"
+                                           name="art-title" placeholder="Choose a title" required
+                                           type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <!--ArticleTag is required, but only one for now-->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-auto m-auto">
+                                    <label for="topic">Topics</label>
+                                </div>
+                                <div class="col">
+                                    <div class="form-control" id="topic">
+                                        <div th:each="tag : ${tags}"
+                                             class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                   id="tagCheckbox" th:value="${tag.tagName}">
+                                            <label class="form-check-label" for="tagCheckbox"
+                                                   th:text="${tag.tagName}">Tag
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--ArticleTag is required, but only one for now-->
-                            <!--TODO: Transformer les tags en boucle th:each-->
-                            <div class="form-group">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-                                        <label for="art-tags">Tag</label>
-                                    </div>
-                                    <div class="col my-1">
-                                        <select th:value="${art.listTag}" class="form-control" id="art-tags"
-                                            name="art-listTag" required type="text">
-                                            <option selected>Choose a topic</option>
-                                            <option>Cooking</option>
-                                            <option>New Technology</option>
-                                            <option>Travel</option>
-                                            <option>Health</option>
-                                            <option>Sport</option>
-                                        </select>
-                                    </div>
+                        </div>
+                        <!--ArticleImage is not required-->
+                        <!--TODO: Importer les images au bon format-->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-auto m-auto">
+                                    <label class="align-middle" for="art-image">Upload an
+                                        image</label>
+                                </div>
+                                <div class="col">
+                                    <input th:value="${art.image}" class="form-control"
+                                           id="art-image"
+                                           alt="your image" type="url">
                                 </div>
                             </div>
-                            <!--ArticleImage is not required-->
-                            <!--TODO: Importer les images au bon format-->
-                            <div class="form-group">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-
-                                        <label for="art-image">Upload an image:</label>
-                                    </div>
-                                    <div class="col my-1">
-
-                                        <input th:value="${art.image}" class="form-control" id="art-image"
-                                            alt="your image" src="image" type="image">
-                                    </div>
+                        </div>
+                        <!--ArticlePublished is hidden-->
+                        <input th:value="${art.published}" id="art-published" name="art-published"
+                               type="hidden">
+                        <!--UserId is required-->
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-auto m-auto">
+                                    <label for="user-id">User Id</label>
+                                </div>
+                                <div class="col">
+                                    <input th:value="${art.id}" class="form-control" id="user-id"
+                                           name="user-id"
+                                           placeholder="What is your user-id?" required
+                                           type="number">
                                 </div>
                             </div>
-                            <!--ArticlePublished is hidden-->
-                            <input th:value="${art.published}" id="art-published" name="art-published" type="hidden">
-                            <!--UserId is required-->
-                            <div class="form-group">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-                                        <label for="user-id">User Id</label>
-                                    </div>
-                                    <div class="col my-1">
-                                        <input th:value="${art.id}" class="form-control" id="user-id" name="user-id"
-                                            placeholder="What is your user-id?" required type="number">
-                                    </div>
-                                </div>
-                            </div>
-                            <!--ArticleContent is required-->
-                            <div class="form-group">
+                        </div>
+                        <!--ArticleContent is required-->
+                        <div class="form-group">
 
-                                <label for="art-content">Content</label>
-                                <textarea th:value="${art.content}" class="form-control" id="art-content"
-                                    name="art-content" placeholder="Votre contenu" required type="text" rows="8"
-                                    maxlength="100000"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
+                            <label class="mb-1" for="art-content">Content</label>
+                            <textarea th:value="${art.content}" class="form-control"
+                                      id="art-content"
+                                      name="art-content"
+                                      placeholder="Let your imagination run wild ..." required
+                                      type="text" rows="8"
+                                      maxlength="100000"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-                <!-- form -->
-                <!--                <form action="/articles" method="post">
-                                <input th:value="${art.id}" name="id" type="hidden">
-                                <label for="art-title">Title :</label>
-                                <input th:value="${art.title}" id="art-title" name="Title" placeholder="LE TITRE" required
-                                    type="text">
-                                <br><br>
-                                <label for="art-content">Content:</label>
-                                <input th:value="${art.content}" id="art-content" name="content" placeholder="Votre contenu"
-                                    required type="text">
-                                <br><br>
-                                <label for="art-published">Date:</label>
-                                <input th:value="${art.published}" id="art-published" name="published" placeholder="1980-07-31"
-                                    required type="date">
-                                <br><br>-->
-                <!--
-                <label for="art-birth-place">Birth Place:</label>
-                <input th:value="${art.birthPlace}" id="art-birth-place" name="birthPlace" placeholder="London"
-                required type="text">
-                <br><br>
-                <label for="art-biography">Biography:</label>
-                <textarea th:text="${art.biography}" id="art-biography" name="biography"></textarea>
-                <br><br>
-                <label for="art-is-muggle">Is Muggle ?</label>
-                <input th:checked="${art.muggle}" id="art-is-muggle" name="muggle" type="checkbox" value="true">
-                <br><br>
-            -->
-                <!--                    <input type="submit" value="Send">
-                            </form>-->
+            </div>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Search Widget -->
+            <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
+
+            <!-- Categories Widget -->
+            <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget
             </div>
 
-            <!-- Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Search Widget -->
-                <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
-
-                <!-- Categories Widget -->
-                <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget
-                </div>
-
-                <!-- Side Widget -->
-                <div th:insert="fragments/widget :: widget">Widget</div>
-
-            </div>
+            <!-- Side Widget -->
+            <div th:insert="fragments/widget :: widget">Widget</div>
 
         </div>
-        <!-- /.row -->
 
     </div>
-    <!-- /.container -->
+    <!-- /.row -->
 
-    <!-- Footer -->
-    <div th:insert="fragments/footer :: footer">Footer</div>
+</div>
+<!-- /.container -->
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="../static/vendor/jquery/jquery.min.js" th:href="@{/vendor/jquery/jquery.min.css}"></script>
-    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"
+<!-- Footer -->
+<div th:insert="fragments/footer :: footer">Footer</div>
+
+<!-- Bootstrap core JavaScript -->
+<script src="../static/vendor/jquery/jquery.min.js"
+        th:href="@{/vendor/jquery/jquery.min.css}"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"
         th:href="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>

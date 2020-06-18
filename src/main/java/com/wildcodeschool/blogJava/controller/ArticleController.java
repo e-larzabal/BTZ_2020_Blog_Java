@@ -3,6 +3,7 @@ package com.wildcodeschool.blogJava.controller;
 import java.util.List;
 
 import com.wildcodeschool.blogJava.dao.ArticleDao;
+import com.wildcodeschool.blogJava.dao.TagDao;
 import com.wildcodeschool.blogJava.model.Article;
 
 import com.wildcodeschool.blogJava.model.Tag;
@@ -24,6 +25,8 @@ public class ArticleController {
 
     @Autowired
     private ArticleDao articleDao;
+    @Autowired
+    private TagDao tagDao;
 
     @GetMapping({ "/", "/articles" })
     public String getHome(Model model) {
@@ -73,7 +76,8 @@ public class ArticleController {
 
         model.addAttribute("art", new Article());
         model.addAttribute("user", user);
-        model.addAttribute("tag", tag);
+
+        model.addAttribute("tags", tagDao.findAll());
 
         return TEMPLATE_ARTICLE_EDIT;
     }
@@ -88,8 +92,8 @@ public class ArticleController {
         return TEMPLATE_ARTICLE_EDIT;
     }
 
-    @PostMapping("/articles")
-    public String saveArticle(Model model, @ModelAttribute Article article) {
+    @PostMapping("/articles/{id}")
+    public String saveArticle(Model model, @ModelAttribute Article article, @PathVariable Long id) {
 
         if (article.getId() == null) {
             articleDao.create(article);
@@ -97,7 +101,7 @@ public class ArticleController {
             articleDao.update(article);
         }
 
-        model.addAttribute("article", article);
+        model.addAttribute("art", article);
 
         return "redirect:" + TEMPLATE_ARTICLE + "/" + article.getId();
     }
