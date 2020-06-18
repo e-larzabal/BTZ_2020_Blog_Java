@@ -31,9 +31,7 @@ public class TagRepository implements TagDao {
 
         try {
             connection = JdbcUtils.getConnection(config.mysql);
-            statement = connection.prepareStatement("SELECT id, tagName, color "
-                    + " FROM tag "
-                    + " WHERE id = ? ");
+            statement = connection.prepareStatement("SELECT id, tagName, color " + " FROM tag " + " WHERE id = ? ");
 
             statement.setLong(1, id);
             resultSet = statement.executeQuery();
@@ -73,9 +71,8 @@ public class TagRepository implements TagDao {
 
         try {
             connection = JdbcUtils.getConnection(config.mysql);
-            statement = connection.prepareStatement("SELECT id, tagName, color "
-                    + "  FROM tag "
-                    + "  ORDER BY tagName DESC ; ");
+            statement = connection
+                    .prepareStatement("SELECT id, tagName, color " + "  FROM tag " + "  ORDER BY tagName DESC ; ");
             resultSet = statement.executeQuery();
 
             List<Tag> tags = new ArrayList<>();
@@ -113,9 +110,7 @@ public class TagRepository implements TagDao {
 
         try {
             connection = JdbcUtils.getConnection(config.mysql);
-            statement = connection.prepareStatement(
-                    "DELETE FROM tag WHERE id = ? "
-            );
+            statement = connection.prepareStatement("DELETE FROM tag WHERE id = ? ");
             statement.setLong(1, id);
 
             if (statement.executeUpdate() != 1) {
@@ -128,7 +123,6 @@ public class TagRepository implements TagDao {
             JdbcUtils.closeStatement(statement);
             JdbcUtils.closeConnection(connection);
         }
-
 
     }
 
@@ -147,7 +141,7 @@ public class TagRepository implements TagDao {
             resultSet = statement.executeQuery();
 
             List<Tag> tags = new ArrayList<>();
-            
+
             while (resultSet.next()) {
                 Long idTag = resultSet.getLong("id");
                 String tagName = resultSet.getString("tagName");
@@ -176,10 +170,8 @@ public class TagRepository implements TagDao {
         try {
 
             connection = JdbcUtils.getConnection(config.mysql);
-            statement = connection.prepareStatement(
-                    "INSERT INTO tag (tagName, color) VALUES (?, ?)",
-                    statement.RETURN_GENERATED_KEYS
-            );
+            statement = connection.prepareStatement("INSERT INTO tag (tagName, color) VALUES (?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, tag.getTagName());
             statement.setInt(2, tag.getColor().getRGB());
 
@@ -216,9 +208,7 @@ public class TagRepository implements TagDao {
 
         try {
             connection = JdbcUtils.getConnection(config.mysql);
-            statement = connection.prepareStatement(
-                    "UPDATE tag SET tagName=?, color=? WHERE id=?"
-            );
+            statement = connection.prepareStatement("UPDATE tag SET tagName=?, color=? WHERE id=?");
             statement.setString(1, tag.getTagName());
             statement.setInt(2, tag.getColor().getRGB());
             statement.setLong(3, tag.getId());

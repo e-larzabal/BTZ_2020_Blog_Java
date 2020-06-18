@@ -55,7 +55,7 @@ public class ArticleController {
     @GetMapping("/edit-article")
     public String getTemplateArticleEdit(Model model, @ModelAttribute User user, @ModelAttribute Tag tag) {
 
-        model.addAttribute("art", new Article());
+        model.addAttribute("article", new Article());
         model.addAttribute("user", user);
         model.addAttribute("tag", tag);
 
@@ -67,7 +67,7 @@ public class ArticleController {
 
         article = articleDao.findById(id);
 
-        model.addAttribute("art", article);
+        model.addAttribute("article", article);
 
         return TEMPLATE_ARTICLE_EDIT;
     }

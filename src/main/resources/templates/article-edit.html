@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <form action="/articles" method="post">
                             <!--ArticleId is hidden-->
-                            <input th:value="${art.id}" name="id" type="hidden">
+                            <input th:value="${article.id}" name="id" type="hidden">
                             <!--ArticleTitle is required-->
                             <div class="form-group">
                                 <div class="form-row align-items-center">
@@ -44,7 +44,7 @@
                                         <label for="art-title">Title</label>
                                     </div>
                                     <div class="col my-1">
-                                        <input th:value="${art.title}" class="form-control" id="art-title"
+                                        <input th:value="${article.title}" class="form-control" id="art-title"
                                             name="art-title" placeholder="Choose a title" required type="text">
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                         <label for="art-tags">Tag</label>
                                     </div>
                                     <div class="col my-1">
-                                        <select th:value="${art.listTag}" class="form-control" id="art-tags"
+                                        <select th:value="${article.listTag}" class="form-control" id="art-tags"
                                             name="art-listTag" required type="text">
                                             <option selected>Choose a topic</option>
                                             <option>Cooking</option>
@@ -79,13 +79,14 @@
                                     </div>
                                     <div class="col my-1">
 
-                                        <input th:value="${art.image}" class="form-control" id="art-image"
+                                        <input th:value="${article.image}" class="form-control" id="art-image"
                                             alt="your image" src="image" type="image">
                                     </div>
                                 </div>
                             </div>
                             <!--ArticlePublished is hidden-->
-                            <input th:value="${art.published}" id="art-published" name="art-published" type="hidden">
+                            <input th:value="${article.published}" id="art-published" name="art-published"
+                                type="hidden">
                             <!--UserId is required-->
                             <div class="form-group">
                                 <div class="form-row align-items-center">
@@ -93,7 +94,7 @@
                                         <label for="user-id">User Id</label>
                                     </div>
                                     <div class="col my-1">
-                                        <input th:value="${art.id}" class="form-control" id="user-id" name="user-id"
+                                        <input th:value="${article.id}" class="form-control" id="user-id" name="user-id"
                                             placeholder="What is your user-id?" required type="number">
                                     </div>
                                 </div>
@@ -102,7 +103,7 @@
                             <div class="form-group">
 
                                 <label for="art-content">Content</label>
-                                <textarea th:value="${art.content}" class="form-control" id="art-content"
+                                <textarea th:value="${article.content}" class="form-control" id="art-content"
                                     name="art-content" placeholder="Votre contenu" required type="text" rows="8"
                                     maxlength="100000"></textarea>
                             </div>
@@ -112,29 +113,29 @@
                 </div>
                 <!-- form -->
                 <!--                <form action="/articles" method="post">
-                                <input th:value="${art.id}" name="id" type="hidden">
+                                <input th:value="${article.id}" name="id" type="hidden">
                                 <label for="art-title">Title :</label>
-                                <input th:value="${art.title}" id="art-title" name="Title" placeholder="LE TITRE" required
+                                <input th:value="${article.title}" id="art-title" name="Title" placeholder="LE TITRE" required
                                     type="text">
                                 <br><br>
                                 <label for="art-content">Content:</label>
-                                <input th:value="${art.content}" id="art-content" name="content" placeholder="Votre contenu"
+                                <input th:value="${article.content}" id="art-content" name="content" placeholder="Votre contenu"
                                     required type="text">
                                 <br><br>
                                 <label for="art-published">Date:</label>
-                                <input th:value="${art.published}" id="art-published" name="published" placeholder="1980-07-31"
+                                <input th:value="${article.published}" id="art-published" name="published" placeholder="1980-07-31"
                                     required type="date">
                                 <br><br>-->
                 <!--
                 <label for="art-birth-place">Birth Place:</label>
-                <input th:value="${art.birthPlace}" id="art-birth-place" name="birthPlace" placeholder="London"
+                <input th:value="${article.birthPlace}" id="art-birth-place" name="birthPlace" placeholder="London"
                 required type="text">
                 <br><br>
                 <label for="art-biography">Biography:</label>
-                <textarea th:text="${art.biography}" id="art-biography" name="biography"></textarea>
+                <textarea th:text="${article.biography}" id="art-biography" name="biography"></textarea>
                 <br><br>
                 <label for="art-is-muggle">Is Muggle ?</label>
-                <input th:checked="${art.muggle}" id="art-is-muggle" name="muggle" type="checkbox" value="true">
+                <input th:checked="${article.muggle}" id="art-is-muggle" name="muggle" type="checkbox" value="true">
                 <br><br>
             -->
                 <!--                    <input type="submit" value="Send">

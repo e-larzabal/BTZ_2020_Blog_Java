@@ -2,28 +2,28 @@
 <article class="card mb-4" th:fragment="blog-article" xmlns:th="http://www.thymeleaf.org">
     <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
 
-    <!--div class="card-text" th:each="tag : ${art.tags}"-->
+    <!--div class="card-text" th:each="tag : ${article.tags}"-->
     <tags class="ml-4 my-1">
-        <span class="card-text" th:if="${art.listTag.empty}">
+        <span class="card-text" th:if="${article.listTag.empty}">
             <span class="card-text"><i>No Tags Available </i></span>
         </span>
-        <span class="card-text" th:each="tag : ${art.listTag}">
+        <span class="card-text" th:each="tag : ${article.listTag}">
             <a href="#" class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
         </span>
     </tags>
     <div class="card-body">
-        <h2 class="card-title" th:text="${art.title}">Article Title</h2>
+        <h2 class="card-title" th:text="${article.title}">Article Title</h2>
         <p class="card-text" th:text="${#strings.abbreviate(art.content,150)}">Votre contenu</p>
         <div class="d-flex flex-nowrap"> 
-            <a th:href="@{/articles/{id}(id = ${art.id})}" class="btn btn-primary">Read More &rarr;</a>
+            <a th:href="@{/articles/{id}(id = ${article.id})}" class="btn btn-primary">Read More &rarr;</a>
             <div class="ml-auto">
-                <a th:href="@{/edit-article/{id}(id = ${art.id})}" class="btn btn-primary">Edit <i class='fas fa-pencil-alt'></i></a>
+                <a th:href="@{/edit-article/{id}(id = ${article.id})}" class="btn btn-primary">Edit <i class='fas fa-pencil-alt'></i></a>
                 <!-- TODO : delete no try !!!!!!-->
-                <a th:href="@{/delete/{id}(id = ${art.id})}" class="btn btn-danger">Delete <i class='fas fa-trash-alt'></i></a>
+                <a th:href="@{/delete/{id}(id = ${article.id})}" class="btn btn-danger">Delete <i class='fas fa-trash-alt'></i></a>
             </div>
         </div>
     </div>
-    <div class="card-footer text-muted" th:text="| Posted : ${art.published} by ${art.user.firstName} ${art.user.lastName} |">
+    <div class="card-footer text-muted" th:text="| Posted : ${article.published} by ${article.user.firstName} ${article.user.lastName} |">
         Posted on January 1, 2017 by
         <a href="#">Start Bootstrap</a>
     </div>
