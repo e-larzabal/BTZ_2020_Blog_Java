@@ -1,9 +1,7 @@
 <!-- Blog Article -->
 <article class="card mb-4" th:fragment="blog-article" xmlns:th="http://www.thymeleaf.org">
-    <img th:if="${article.image != ''}" th:src="${article.image}"
-         class="card-img-top"
-         style="height: 250px; object-fit: cover;"
-         alt="">
+    <img th:if="${article.image != ''}" th:src="${article.image}" class="card-img-top"
+        style="height: 250px; object-fit: cover;" alt="">
 
     <!--div class="card-text" th:each="tag : ${article.tags}"-->
     <tags class="ml-4 my-1">
@@ -22,14 +20,8 @@
             <a th:href="@{/articles/{id}(id = ${article.id})}" class="btn btn-primary">Read More &rarr;</a>
             <div class="ml-auto">
                 <a th:href="@{/edit-article/{id}(id = ${article.id})}" class="btn btn-primary">Edit <i class='fas fa-pencil-alt'></i></a>
-                <!-- TODO : delete no try !!!!!!-->
 
-                <form action="#" th:action="@{/articles/{id}(id = ${article.id})}" th:method="delete" >
-                    <input type="hidden" name="_method" value="delete" />
-                    <a type="submit" id="submitButton" class="btn btn-danger">Delete <i class='fas fa-trash-alt'></i></a>
-                  </form>
-
-                <!-- <a th:href="@{/articles/{id}(id = ${article.id})}" class="btn btn-danger">Delete <i class='fas fa-trash-alt'></i></a> -->
+                <a th:href="@{/delete-article/{id}(id = ${article.id})}" class="btn btn-danger">Delete <i class='fas fa-trash-alt'></i></a>
             </div>
         </div>
     </div>
