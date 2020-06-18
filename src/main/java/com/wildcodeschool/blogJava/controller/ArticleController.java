@@ -92,8 +92,8 @@ public class ArticleController {
         return TEMPLATE_ARTICLE_EDIT;
     }
 
-    @PostMapping("/articles")
-    public String saveArticle(Model model, @ModelAttribute Article article) {
+    @PostMapping("/articles/{id}")
+    public String saveArticle(Model model, @ModelAttribute Article article, @PathVariable Long id) {
 
         if (article.getId() == null) {
             articleDao.create(article);
@@ -101,7 +101,7 @@ public class ArticleController {
             articleDao.update(article);
         }
 
-        model.addAttribute("article", article);
+        model.addAttribute("art", article);
 
         return "redirect:" + TEMPLATE_ARTICLE + "/" + article.getId();
     }
