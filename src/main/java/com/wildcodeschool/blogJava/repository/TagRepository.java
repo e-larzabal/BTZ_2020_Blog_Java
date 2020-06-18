@@ -178,7 +178,7 @@ public class TagRepository implements TagDao {
             connection = JdbcUtils.getConnection(config.mysql);
             statement = connection.prepareStatement(
                     "INSERT INTO tag (tagName, color) VALUES (?, ?)",
-                    statement.RETURN_GENERATED_KEYS
+                    Statement.RETURN_GENERATED_KEYS
             );
             statement.setString(1, tag.getTagName());
             statement.setInt(2, tag.getColor().getRGB());

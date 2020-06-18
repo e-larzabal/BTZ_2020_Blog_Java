@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -192,13 +193,6 @@ public class ArticleRepository implements ArticleDao {
         return null;
     }
 
-
-
-
-
-    
-
-
     @Override
     public void deleteById(Long id) {
 
@@ -238,7 +232,7 @@ public class ArticleRepository implements ArticleDao {
             connection = JdbcUtils.getConnection(config.mysql);
             statement = connection.prepareStatement(
                     "INSERT INTO article (content, image, published, id_user) VALUES (?, ?, ?, ?)",
-                    statement.RETURN_GENERATED_KEYS
+                    Statement.RETURN_GENERATED_KEYS
             );
 
             statement.setString(1, article.getContent());
@@ -281,7 +275,7 @@ public class ArticleRepository implements ArticleDao {
         try {
             connection = JdbcUtils.getConnection(config.mysql);
             statement = connection.prepareStatement(
-                    "UPDATE article SET content=?, image=?, published=?, id_user=? WHERE id=?"
+                    "UPDATE article SET content=?, image=?, published=?, id_user=? WHERE id=? "
             );
             statement.setString(1, article.getContent());
             statement.setString(2, article.getImage());
