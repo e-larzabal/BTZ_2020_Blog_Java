@@ -1,0 +1,9 @@
+body {
+    padding-top: 56px;
+}
+.form-control {
+    height: auto!important;
+}
+label {
+    margin-bottom: 0!important;
+}

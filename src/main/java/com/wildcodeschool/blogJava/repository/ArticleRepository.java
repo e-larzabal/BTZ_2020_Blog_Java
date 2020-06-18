@@ -1,11 +1,10 @@
 package com.wildcodeschool.blogJava.repository;
 
-import java.sql.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -134,6 +133,58 @@ public class ArticleRepository implements ArticleDao {
             JdbcUtils.closeConnection(connection);
         }
 
+        return null;
+    }
+
+    @Override
+    public List<Article> FindByIdTag(Long idTag) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+            statement = connection.prepareStatement("SELECT id, title, content, image, published, id_user  "
+                    + "  FROM article LEFT JOIN article_has_tag ON id = id_article WHERE id_tag = ? "
+                    + "  ORDER BY published DESC ; ");
+
+            statement.setLong(1, idTag);
+
+            resultSet = statement.executeQuery();
+
+            List<Article> articles = new ArrayList<>();
+
+            while (resultSet.next()) {
+
+                // Read the article
+                Long id = resultSet.getLong("id");
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                String image = resultSet.getString("image");
+                Date published = resultSet.getDate("published");
+                Long id_user = resultSet.getLong("id_user");
+
+                // Read the article's author
+                User user = new User();
+                user = userDao.findById(id_user);
+
+                // Read the tag list of the article
+                List<Tag> tags = new ArrayList<>();
+                tags = tagDao.findAllInArticle(id);
+
+                articles.add(new Article(id, title, content, image, published, user, tags));
+
+            }
+
+            return articles;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
         return null;
     }
 

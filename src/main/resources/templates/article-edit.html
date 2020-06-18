@@ -8,14 +8,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Post - Start Bootstrap Template</title>
+    <title>Create your Article</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
         th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
 
     <!-- Custom styles for this template -->
-    <link href="../static/css/blog-article-formulaire.css" rel="stylesheet" th:href="@{/css/blog-article.css}">
+    <link href="../static/css/article-edit.css" rel="stylesheet" th:href="@{/css/article-edit.css}">
 
 </head>
 
@@ -107,12 +107,20 @@
                                     name="art-content" placeholder="Votre contenu" required type="text" rows="8"
                                     maxlength="100000"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
                     </div>
+                    <!--ArticleContent is required-->
+                    <div class="form-group">
+
+                        <label class="mb-1" for="art-content">Content</label>
+                        <textarea th:value="${art.content}" class="form-control" id="art-content" name="art-content"
+                            placeholder="Let your imagination run wild ..." required type="text" rows="8"
+                            maxlength="100000"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-                <!-- form -->
-                <!--                <form action="/articles" method="post">
+                <<<<<<< HEAD <!-- form -->
+                    <!--                <form action="/articles" method="post">
                                 <input th:value="${article.id}" name="id" type="hidden">
                                 <label for="art-title">Title :</label>
                                 <input th:value="${article.title}" id="art-title" name="Title" placeholder="LE TITRE" required
@@ -126,7 +134,7 @@
                                 <input th:value="${article.published}" id="art-published" name="published" placeholder="1980-07-31"
                                     required type="date">
                                 <br><br>-->
-                <!--
+                    <!--
                 <label for="art-birth-place">Birth Place:</label>
                 <input th:value="${article.birthPlace}" id="art-birth-place" name="birthPlace" placeholder="London"
                 required type="text">
@@ -138,27 +146,30 @@
                 <input th:checked="${article.muggle}" id="art-is-muggle" name="muggle" type="checkbox" value="true">
                 <br><br>
             -->
-                <!--                    <input type="submit" value="Send">
+                    <!--                    <input type="submit" value="Send">
                             </form>-->
+                    =======
+                    >>>>>>> 50f391ae40f17eb0341b2f47c30050606cbb3555
+            </div>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Search Widget -->
+            <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
+
+            <!-- Categories Widget -->
+            <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget
             </div>
 
-            <!-- Sidebar Widgets Column -->
-            <div class="col-md-4">
-
-                <!-- Search Widget -->
-                <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
-
-                <!-- Categories Widget -->
-                <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget
-                </div>
-
-                <!-- Side Widget -->
-                <div th:insert="fragments/widget :: widget">Widget</div>
-
-            </div>
+            <!-- Side Widget -->
+            <div th:insert="fragments/widget :: widget">Widget</div>
 
         </div>
-        <!-- /.row -->
+
+    </div>
+    <!-- /.row -->
 
     </div>
     <!-- /.container -->
