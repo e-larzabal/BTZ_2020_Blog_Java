@@ -10,12 +10,16 @@
 
   <title>Blog Charlie's Angels - home</title>
 
+  <link rel="icon" type="image/png" href="../static/images/favicon.svg" th:href="@{images/favicon.svg}" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
   <!-- Bootstrap core CSS -->
-  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+  <link href=" ../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
     th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
 
   <!-- Custom styles for this template -->
   <link href="../static/css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
+  <link href="../static/css/fragments.css" rel="stylesheet" th:href="@{/css/fragments.css}">
 
 </head>
 
@@ -69,10 +73,9 @@
   <div th:insert="fragments/footer :: footer">Footer</div>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="../static/vendor/jquery/jquery.min.js"
-          th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script src="../static/vendor/jquery/jquery.min.js" th:src="@{/vendor/jquery/jquery.min.js}"></script>
   <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"
-          th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js }"></script>
+    th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js }"></script>
 
   <!-- Fontawsome -->
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>
