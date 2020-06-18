@@ -33,6 +33,7 @@ public class ArticleController {
     public String getHome(Model model) {
 
         model.addAttribute("articles", articleDao.findAll());
+
         model.addAttribute("listTag", tagDao.findAll());
 
         return TEMPLATE_HOME;
@@ -42,6 +43,8 @@ public class ArticleController {
     public String getTemplateArticle(Model model, @PathVariable Long id) {
 
         Article article = articleDao.findById(id);
+
+        model.addAttribute("listTag", tagDao.findAll());
 
         if (article == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article inconnu");
@@ -56,6 +59,8 @@ public class ArticleController {
     public String getArticleByIdTag(Model model, @PathVariable Long idTag) {
 
         List<Article> articles = articleDao.FindByIdTag(idTag);
+
+        model.addAttribute("listTag", tagDao.findAll());
 
         if (articles == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pas d'articles avec ce Tag");
@@ -95,6 +100,8 @@ public class ArticleController {
         model.addAttribute("listTag", tagDao.findAll());
 
         model.addAttribute("tags", tagDao.findAll());
+
+        model.addAttribute("listTag", tagDao.findAll());
 
         return TEMPLATE_ARTICLE_EDIT;
     }
