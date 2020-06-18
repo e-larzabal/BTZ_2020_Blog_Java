@@ -9,7 +9,7 @@
                 <ul class="list-unstyled mb-0" style="columns: 2;">
                    <span class="card-text" th:each="tag : ${listTag}">
                        <li>
-                           <a href="#" class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
+                           <a href="#" th:href="|/articles/tag/${tag.id}|"  class="badge badge-pill badge-primary ml-2" th:text="${tag.tagName}"> Tag </a>
                        </li>
                    </span>
                </ul>
