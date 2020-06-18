@@ -2,7 +2,6 @@ package com.wildcodeschool.blogJava.controller;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.wildcodeschool.blogJava.dao.ArticleDao;
 import com.wildcodeschool.blogJava.dao.TagDao;
 import com.wildcodeschool.blogJava.model.Article;

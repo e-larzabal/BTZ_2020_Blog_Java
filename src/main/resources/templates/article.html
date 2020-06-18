@@ -15,7 +15,10 @@
     th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
 
   <!-- Custom styles for this template -->
-  <link href="../static/css/blog-article.css" rel="stylesheet" th:href="@{/css/blog-article.css}">
+  <link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}">
+  <link href="../static/css/fragments.css" rel="stylesheet" th:href="@{/css/fragments.css}">
+  <link href="../static/css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
+  <link href="../static/css/fragments.css" rel="stylesheet" th:href="@{/css/fragments.css}">
 
 </head>
 
@@ -87,9 +90,6 @@
 
         <!-- Categories Widget -->
         <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget</div>
-
-        <!-- Side Widget -->
-        <div th:insert="fragments/widget :: widget">Widget</div>
 
       </div>
 
