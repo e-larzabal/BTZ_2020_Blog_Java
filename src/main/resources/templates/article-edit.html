@@ -34,142 +34,99 @@
                 <div class="card my-4">
                     <h5 class="card-header">Create your article</h5>
                     <div class="card-body">
-                        <form action="/articles" method="post">
+                        <form th:action="@{/articles}" th:object="${article}" method="post">
                             <!--ArticleId is hidden-->
-                            <input th:value="${article.id}" name="id" type="hidden">
+                            <input th:value="${article.id}" th:field="*{id}" name="id" type="hidden">
                             <!--ArticleTitle is required-->
                             <div class="form-group">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
+                                <div class="form-row">
+                                    <div class="col-auto m-auto">
                                         <label for="art-title">Title</label>
                                     </div>
-                                    <div class="col my-1">
-                                        <input th:value="${article.title}" class="form-control" id="art-title"
-                                            name="art-title" placeholder="Choose a title" required type="text">
+                                    <div class="col">
+                                        <input th:value="${article.title}" th:field="*{title}" class="form-control"
+                                            id="art-title" name="art-title" placeholder="Choose a title" required
+                                            type="text">
                                     </div>
                                 </div>
                             </div>
                             <!--ArticleTag is required, but only one for now-->
-                            <!--TODO: Transformer les tags en boucle th:each-->
                             <div class="form-group">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-                                        <label for="art-tags">Tag</label>
+                                <div class="form-row">
+                                    <div class="col-auto m-auto">
+                                        <label for="topic">Topics</label>
                                     </div>
-                                    <div class="col my-1">
-                                        <select th:value="${article.listTag}" class="form-control" id="art-tags"
-                                            name="art-listTag" required type="text">
-                                            <option selected>Choose a topic</option>
-                                            <option>Cooking</option>
-                                            <option>New Technology</option>
-                                            <option>Travel</option>
-                                            <option>Health</option>
-                                            <option>Sport</option>
-                                        </select>
+                                    <div class="col">
+                                        <div class="form-control" id="topic">
+                                            <div th:each="tag : ${tags}" class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="tagCheckbox"
+                                                    th:value="${tag.tagName}">
+                                                <label class="form-check-label" for="tagCheckbox"
+                                                    th:text="${tag.tagName}">Tag
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <!--ArticleImage is not required-->
                             <!--TODO: Importer les images au bon format-->
                             <div class="form-group">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-
-                                        <label for="art-image">Upload an image:</label>
+                                <div class="form-row">
+                                    <div class="col-auto m-auto">
+                                        <label class="align-middle" for="art-image">Upload an
+                                            image</label>
                                     </div>
-                                    <div class="col my-1">
-
-                                        <input th:value="${article.image}" class="form-control" id="art-image"
-                                            alt="your image" src="image" type="image">
+                                    <div class="col">
+                                        <input th:value="${article.image}" th:field="*{image}" class="form-control"
+                                            id="art-image" alt="your image" type="url">
                                     </div>
                                 </div>
                             </div>
-                            <!--ArticlePublished is hidden-->
-                            <input th:value="${article.published}" id="art-published" name="art-published"
-                                type="hidden">
                             <!--UserId is required-->
                             <div class="form-group">
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
+                                <div class="form-row">
+                                    <div class="col-auto m-auto">
                                         <label for="user-id">User Id</label>
                                     </div>
-                                    <div class="col my-1">
-                                        <input th:value="${article.id}" class="form-control" id="user-id" name="user-id"
-                                            placeholder="What is your user-id?" required type="number">
+                                    <div class="col">
+                                        <input th:value="${user.id}" th:field="*{user.id}" class="form-control"
+                                            id="user-id" name="user-id" placeholder="What is your user-id?" required
+                                            type="number">
                                     </div>
                                 </div>
                             </div>
                             <!--ArticleContent is required-->
                             <div class="form-group">
 
-                                <label for="art-content">Content</label>
-                                <textarea th:value="${article.content}" class="form-control" id="art-content"
-                                    name="art-content" placeholder="Votre contenu" required type="text" rows="8"
-                                    maxlength="100000"></textarea>
+                                <label class="mb-1" for="art-content">Content</label>
+                                <textarea th:value="${article.content}" th:field="*{content}" class="form-control"
+                                    id="art-content" name="art-content" placeholder="Let your imagination run wild ..."
+                                    required type="text" rows="8" maxlength="100000"></textarea>
                             </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                     </div>
-                    <!--ArticleContent is required-->
-                    <div class="form-group">
-
-                        <label class="mb-1" for="art-content">Content</label>
-                        <textarea th:value="${art.content}" class="form-control" id="art-content" name="art-content"
-                            placeholder="Let your imagination run wild ..." required type="text" rows="8"
-                            maxlength="100000"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
                 </div>
-                <<<<<<< HEAD <!-- form -->
-                    <!--                <form action="/articles" method="post">
-                                <input th:value="${article.id}" name="id" type="hidden">
-                                <label for="art-title">Title :</label>
-                                <input th:value="${article.title}" id="art-title" name="Title" placeholder="LE TITRE" required
-                                    type="text">
-                                <br><br>
-                                <label for="art-content">Content:</label>
-                                <input th:value="${article.content}" id="art-content" name="content" placeholder="Votre contenu"
-                                    required type="text">
-                                <br><br>
-                                <label for="art-published">Date:</label>
-                                <input th:value="${article.published}" id="art-published" name="published" placeholder="1980-07-31"
-                                    required type="date">
-                                <br><br>-->
-                    <!--
-                <label for="art-birth-place">Birth Place:</label>
-                <input th:value="${article.birthPlace}" id="art-birth-place" name="birthPlace" placeholder="London"
-                required type="text">
-                <br><br>
-                <label for="art-biography">Biography:</label>
-                <textarea th:text="${article.biography}" id="art-biography" name="biography"></textarea>
-                <br><br>
-                <label for="art-is-muggle">Is Muggle ?</label>
-                <input th:checked="${article.muggle}" id="art-is-muggle" name="muggle" type="checkbox" value="true">
-                <br><br>
-            -->
-                    <!--                    <input type="submit" value="Send">
-                            </form>-->
-                    =======
-                    >>>>>>> 50f391ae40f17eb0341b2f47c30050606cbb3555
-            </div>
-        </div>
-
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-            <!-- Search Widget -->
-            <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
-
-            <!-- Categories Widget -->
-            <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget
             </div>
 
-            <!-- Side Widget -->
-            <div th:insert="fragments/widget :: widget">Widget</div>
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Search Widget -->
+                <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
+
+                <!-- Categories Widget -->
+                <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget
+                </div>
+
+                <!-- Side Widget -->
+                <div th:insert="fragments/widget :: widget">Widget</div>
+
+            </div>
 
         </div>
-
-    </div>
-    <!-- /.row -->
+        <!-- /.row -->
 
     </div>
     <!-- /.container -->

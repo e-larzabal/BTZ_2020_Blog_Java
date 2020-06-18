@@ -36,7 +36,7 @@
           <small>Secondary Text</small>
         </h1>
 
-        <section th:each="art : ${articles}">
+        <section th:each="article : ${articles}">
           <div th:insert="fragments/blog-article :: blog-article">Blog Article</div>
         </section>
 

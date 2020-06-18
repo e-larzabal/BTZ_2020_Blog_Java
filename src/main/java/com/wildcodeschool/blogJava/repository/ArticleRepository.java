@@ -224,15 +224,12 @@ public class ArticleRepository implements ArticleDao {
 
             connection = JdbcUtils.getConnection(config.mysql);
             statement = connection.prepareStatement(
-                    "INSERT INTO article (content, image, published, id_user) VALUES (?, ?, ?, ?)",
+                    "INSERT INTO article (title, content, image, id_user) VALUES (?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            statement.setString(1, article.getContent());
-            statement.setString(2, article.getImage());
-            java.sql.Date datePublishedSQL = new java.sql.Date(article.getPublished().getTime()); // convert from
-                                                                                                  // java.util.Date to
-                                                                                                  // java.sql.Date
-            statement.setDate(3, datePublishedSQL);
+            statement.setString(1, article.getTitle());
+            statement.setString(2, article.getContent());
+            statement.setString(3, article.getImage());
             statement.setLong(4, article.getUser().getId());
 
             if (statement.executeUpdate() != 1) {
@@ -268,16 +265,11 @@ public class ArticleRepository implements ArticleDao {
 
         try {
             connection = JdbcUtils.getConnection(config.mysql);
-            statement = connection
-                    .prepareStatement("UPDATE article SET content=?, image=?, published=?, id_user=? WHERE id=?");
+            statement = connection.prepareStatement("UPDATE article SET content=?, image=?, id_user=? WHERE id=?");
             statement.setString(1, article.getContent());
             statement.setString(2, article.getImage());
-            java.sql.Date datePublishedSQL = new java.sql.Date(article.getPublished().getTime()); // convert from
-                                                                                                  // java.util.Date to
-                                                                                                  // java.sql.Date
-            statement.setDate(3, datePublishedSQL);
-            statement.setLong(4, article.getUser().getId());
-            statement.setLong(5, article.getId());
+            statement.setLong(3, article.getUser().getId());
+            statement.setLong(4, article.getId());
 
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data into article");

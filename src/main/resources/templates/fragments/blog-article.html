@@ -14,7 +14,7 @@
     </tags>
     <div class="card-body">
         <h2 class="card-title" th:text="${article.title}">Article Title</h2>
-        <p class="card-text" th:text="${#strings.abbreviate(art.content,150)}">Votre contenu</p>
+        <p class="card-text" th:text="${#strings.abbreviate(article.content,150)}">Votre contenu</p>
         <div class="d-flex flex-nowrap"> 
             <a th:href="@{/articles/{id}(id = ${article.id})}" class="btn btn-primary">Read More &rarr;</a>
             <div class="ml-auto">
