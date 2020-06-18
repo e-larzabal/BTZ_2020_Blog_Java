@@ -1,6 +1,9 @@
 <!-- Blog Article -->
 <article class="card mb-4" th:fragment="blog-article" xmlns:th="http://www.thymeleaf.org">
-    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+    <img th:if="${article.image != ''}" th:src="${article.image}"
+         class="card-img-top"
+         style="height: 250px; object-fit: cover;"
+         alt="">
 
     <!--div class="card-text" th:each="tag : ${article.tags}"-->
     <tags class="ml-4 my-1">
