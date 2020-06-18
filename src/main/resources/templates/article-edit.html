@@ -90,7 +90,8 @@
                                         <label for="user-id">User Id</label>
                                     </div>
                                     <div class="col">
-                                        <input th:value="${user.id}" th:field="*{user.id}" class="form-control"
+                                        <input th:value="${article.user.id}"
+                                               th:field="*{user.id}" class="form-control"
                                             id="user-id" name="user-id" placeholder="What is your user-id?" required
                                             type="number">
                                     </div>
