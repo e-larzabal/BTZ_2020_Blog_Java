@@ -32,8 +32,8 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Page Heading
-          <small>Secondary Text</small>
+        <h1 class="my-4">Your last articles
+          <small>Made by you, for you...</small>
         </h1>
 
         <section th:each="article : ${articles}">
@@ -41,7 +41,7 @@
         </section>
 
         <!-- Pagination -->
-        <div th:insert="fragments/pagination :: pagination">Pagination</div>
+<!--        <div th:insert="fragments/pagination :: pagination">Pagination</div>-->
 
       </div>
 
@@ -55,7 +55,7 @@
         <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget</div>
 
         <!-- Side Widget -->
-        <div th:insert="fragments/widget :: widget">Widget</div>
+<!--        <div th:insert="fragments/widget :: widget">Widget</div>-->
 
       </div>
 
