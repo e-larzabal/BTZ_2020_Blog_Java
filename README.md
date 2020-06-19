@@ -19,7 +19,6 @@ git@github.com:jlbareyre/BTZ_2020_Blog_Java.git
 1.  `mvn clean package`
 2.  `mvn spring-boot:run`
 
-![Application view](/src/main/resources/static/images/app-view.png)
 
 ## Built With
 
