@@ -32,9 +32,9 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Your last articles
-          <small>Made by you, for you...</small>
-        </h1>
+        <h1 class="my-4">Last articles</h1>
+        <h2 style="font-size: 1.3rem" class="pb-3 text-right font-italic font-weight-light">Made by you, for
+          you...</h2>
 
         <section th:each="article : ${articles}">
           <div th:insert="fragments/blog-article :: blog-article">Blog Article</div>
