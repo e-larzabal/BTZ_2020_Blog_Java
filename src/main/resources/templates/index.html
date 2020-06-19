@@ -10,12 +10,19 @@
 
   <title>Blog Charlie's Angels - home</title>
 
+  <link rel="icon" type="image/png" href="../static/images/favicon.svg" th:href="@{images/favicon.svg}" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
   <!-- Bootstrap core CSS -->
-  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+  <link href=" ../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
     th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
 
   <!-- Custom styles for this template -->
+  <link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}">
+  <link href="../static/css/fragments.css" rel="stylesheet" th:href="@{/css/fragments.css}">
+  <link href="../static/css/blog-article.css" rel="stylesheet" th:href="@{/css/blog-article.css}">
   <link href="../static/css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
+  <link href="../static/css/fragments.css" rel="stylesheet" th:href="@{/css/fragments.css}">
 
 </head>
 
@@ -32,7 +39,7 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Last articles</h1>
+        <h1 class="my-4">Welcome to my blog</h1>
         <h2 style="font-size: 1.3rem" class="pb-3 text-right font-italic font-weight-light">Made by you, for
           you...</h2>
 
@@ -40,13 +47,10 @@
           <div th:insert="fragments/blog-article :: blog-article">Blog Article</div>
         </section>
 
-        <!-- Pagination -->
-<!--        <div th:insert="fragments/pagination :: pagination">Pagination</div>-->
-
       </div>
 
       <!-- Sidebar Widgets Column -->
-      <div class="col-md-4">
+      <div class="col-md-4 mt-4">
 
         <!-- Search Widget -->
         <div th:insert="fragments/search-widget :: search-widget">Search Widget</div>
@@ -54,8 +58,8 @@
         <!-- Categories Widget -->
         <div th:insert="fragments/categories-widget :: categories-widget">Categories Widget</div>
 
-        <!-- Side Widget -->
-<!--        <div th:insert="fragments/widget :: widget">Widget</div>-->
+        <img class="my-4 ml-4" src="https://cdn2.iconfinder.com/data/icons/animals-nature-2/50/1F984-unicorn-512.png"
+          width="300" height="280" alt="unicorn">
 
       </div>
 
@@ -69,10 +73,9 @@
   <div th:insert="fragments/footer :: footer">Footer</div>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="../static/vendor/jquery/jquery.min.js"
-          th:src="@{/vendor/jquery/jquery.min.js}"></script>
+  <script src="../static/vendor/jquery/jquery.min.js" th:src="@{/vendor/jquery/jquery.min.js}"></script>
   <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"
-          th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js }"></script>
+    th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js }"></script>
 
   <!-- Fontawsome -->
   <script src='https://kit.fontawesome.com/a076d05399.js'></script>

@@ -128,7 +128,6 @@ public class TagRepository implements TagDao {
 
     @Override
     public List<Tag> findAllInArticle(Long id) {
-        // TODO Auto-generated method stub
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;

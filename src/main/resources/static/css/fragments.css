@@ -1,0 +1,37 @@
+.navbar-custom {
+    background-color:#eb4c64;
+}
+
+.titleNav{
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8rem;
+}
+
+.othertextNav{
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.2rem;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: #563440;
+}
+/* change the link color */
+.navbar-custom .navbar-nav .nav-link {
+    color: #563440;
+}
+/* change the color of active or hovered links */
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #563440;
+}
+
+.footer-custom{
+    background-color:#eb4c64;
+}
+
+.text-custom{
+    font-family: 'Pacifico', cursive;
+    color: #563440;
+    text-shadow: 1px 2px 2px #A882DD;
+}
