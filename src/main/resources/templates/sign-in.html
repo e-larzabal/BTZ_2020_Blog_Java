@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Blog Charlie's Angels - sign in</title>
+
+    <link rel="icon" type="image/png" href="../static/images/favicon.svg" th:href="@{images/favicon.svg}" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+        th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/index.css" rel="stylesheet" th:href="@{/css/index.css}">
+    <link href="../static/css/fragments.css" rel="stylesheet" th:href="@{/css/fragments.css}">
+    <link href="../static/css/blog-article.css" rel="stylesheet" th:href="@{/css/blog-article.css}">
+    <link href="../static/css/blog-home.css" rel="stylesheet" th:href="@{/css/blog-home.css}">
+    <link href="../static/css/blog-sign-in.css" rel="stylesheet" th:href="@{/css/blog-sign-in.css}">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <div th:insert="fragments/header :: header">Header / Navbar</div>
+
+    <!-- Page Content -->
+    <div class="container col-6 align-content-center my-4">
+        <div class="card my-4">
+            <h5 class="card-header">Sign In</h5>
+            <div class="card-body">
+                <form action="/articles" method="post">
+                    <!--UserId is hidden-->
+                    <input th:value="${user.id}" name="id" type="hidden">
+                    <!--UserName is required-->
+                    <div class="form-group">
+                        <label for="user-username">UserName</label>
+                        <input th:value="${user.userName}" class="form-control" id="user-username" name="user-username"
+                            required type="text">
+                    </div>
+                    <!--User Password is required-->
+                    <div class="form-group">
+                        <label for="user-password">Password</label>
+                        <input class="form-control" id="user-password" name="user-password" required type="text">
+                    </div>
+                    <button type="submit" class="btn btn-custom">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <div th:insert="fragments/footer :: footer">Footer</div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/vendor/jquery/jquery.min.js" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"
+        th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js }"></script>
+
+</body>
+
+</html>

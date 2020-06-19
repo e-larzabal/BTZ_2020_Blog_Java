@@ -6,3 +6,12 @@
 body {
   padding-top: 56px;
 }
+
+.btn-custom{
+  background-color: #FFD4CA ;
+  color: #563440;
+}
+
+.btn-custom:hover{
+  color: #563440;
+}

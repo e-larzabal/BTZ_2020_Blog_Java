@@ -1,5 +1,6 @@
 package com.wildcodeschool.blogJava.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +11,9 @@ public class Article {
     private String content;
     private String image;
     private Date published;
-    private User user;
+    private User user = new User();
     
-    private List<Tag> listTag;
+    private List<Tag> listTag = new ArrayList<>();
 
     public Article() {}
 

@@ -1,16 +1,32 @@
 <!-- Blog Article -->
+<article class="card mb-4" th:fragment="blog-article" xmlns:th="http://www.thymeleaf.org">
+    <img th:if="${article.image != ''}" th:src="${article.image}" class="card-img-top"
+        style="height: 250px; object-fit: cover;" alt="">
 
-<div class="card mb-4" th:fragment="blog-article">
-    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+    <!--div class="card-text" th:each="tag : ${article.tags}"-->
+    <tags class="ml-4 my-1">
+        <span class="card-text" th:if="${article.listTag.empty}">
+            <span class="card-text"><i>No Tags Available </i></span>
+        </span>
+        <span class="card-text" th:each="tag : ${article.listTag}">
+            <a href="#" th:href="|/articles/tag/${tag.id}|" class="badge badge-pill badge-primary ml-2  px-3 pl-1"
+                th:text="${tag.tagName}" style="background: #A882DD;"> Tag </a>
+        </span>
+    </tags>
     <div class="card-body">
-        <h2 class="card-title">Article Title</h2>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla?
-            Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus,
-            veniam magni quis!</p>
-        <a href="#" class="btn btn-primary">Read More &rarr;</a>
+        <h2 class="card-title" th:text="${article.title}">Article Title</h2>
+        <p class="card-text" th:text="${#strings.abbreviate(article.content,150)}">Votre contenu</p>
+        <div class="d-flex flex-nowrap"> 
+            <a th:href="@{/articles/{id}(id = ${article.id})}" class="btn btn-custom">Read More &rarr;</a>
+            <div class="ml-auto">
+                <a th:href="@{/edit-article/{id}(id = ${article.id})}" class="btn btn-custom">Edit <i class='fas fa-pencil-alt'></i></a>
+
+                <a th:href="@{/delete-article/{id}(id = ${article.id})}" class="btn btn-danger">Delete <i class='fas fa-trash-alt'></i></a>
+            </div>
+        </div>
     </div>
-    <div class="card-footer text-muted">
+    <div class="card-footer text-muted" th:text="| Posted : ${article.published} by ${article.user.firstName} ${article.user.lastName} |">
         Posted on January 1, 2017 by
         <a href="#">Start Bootstrap</a>
     </div>
-</div>
+</article>
