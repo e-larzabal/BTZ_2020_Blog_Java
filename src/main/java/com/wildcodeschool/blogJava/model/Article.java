@@ -12,12 +12,13 @@ public class Article {
     private String image;
     private Date published;
     private User user = new User();
-    
+
     private List<Tag> listTag = new ArrayList<>();
 
-    public Article() {}
+    public Article() {
+    }
 
-    public Article(Long id, String title, String content, String image, Date published, User user, List<Tag> listTag) { 
+    public Article(Long id, String title, String content, String image, Date published, User user, List<Tag> listTag) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -83,5 +84,10 @@ public class Article {
         this.listTag = listTag;
     }
 
-   
+
+    public void addTag(Tag tag) {
+        this.listTag.add(tag);
+    }
+
+
 }

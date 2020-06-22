@@ -1,19 +1,20 @@
 package com.wildcodeschool.blogJava.controller;
 
-import java.util.List;
-
 import com.wildcodeschool.blogJava.dao.ArticleDao;
 import com.wildcodeschool.blogJava.dao.TagDao;
 import com.wildcodeschool.blogJava.model.Article;
-
 import com.wildcodeschool.blogJava.model.Tag;
 import com.wildcodeschool.blogJava.model.User;
+import com.wildcodeschool.blogJava.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ArticleController {
@@ -22,6 +23,9 @@ public class ArticleController {
     private static final String TEMPLATE_ARTICLE = "article";
     private static final String TEMPLATE_ARTICLE_EDIT = "article-edit";
     private static final String TEMPLATE_SIGN_IN = "sign-in";
+
+    @Autowired
+    private ArticleService service;
 
     @Autowired
     private ArticleDao articleDao;
@@ -56,11 +60,24 @@ public class ArticleController {
 
         List<Article> articles = articleDao.FindByIdTag(idTag);
 
-        if (articles == null)
+        if (articles.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pas d'articles avec ce Tag");
 
+        List<Tag> tags = tagDao.findAll();
+        Tag tag = null;
+        for (Tag t : tags) {
+            if (t.getId().equals(idTag)) {
+                tag = t;
+                break;
+            }
+        }
+
+        Optional<Tag> maybeTag = tags.stream().filter(t -> t.getId().equals(idTag)).findFirst();
+        tag = maybeTag.orElse(null);
+
+        model.addAttribute("tag", tag);
+        model.addAttribute("listTag", tags);
         model.addAttribute("articles", articles);
-        model.addAttribute("listTag", tagDao.findAll());
 
         return TEMPLATE_HOME;
     }

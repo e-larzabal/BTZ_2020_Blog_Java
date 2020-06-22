@@ -1,25 +1,23 @@
 package com.wildcodeschool.blogJava.repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.wildcodeschool.blogJava.config.AppConfig;
-import com.wildcodeschool.blogJava.dao.UserDao;
 import com.wildcodeschool.blogJava.dao.ArticleDao;
 import com.wildcodeschool.blogJava.dao.TagDao;
+import com.wildcodeschool.blogJava.dao.UserDao;
 import com.wildcodeschool.blogJava.model.Article;
 import com.wildcodeschool.blogJava.model.Tag;
 import com.wildcodeschool.blogJava.model.User;
 import com.wildcodeschool.blogJava.util.JdbcUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.awt.*;
+import java.sql.*;
+import java.util.Date;
+import java.util.*;
+import java.util.List;
 
 @Repository
 public class ArticleRepository implements ArticleDao {
@@ -35,6 +33,80 @@ public class ArticleRepository implements ArticleDao {
 
     @Override
     public List<Article> findAll() {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = JdbcUtils.getConnection(config.mysql);
+
+            String sql = "SELECT * FROM article as a" +
+                    "JOIN article_has_tag on article_has_tag.id_article = a.id" +
+                    "JOIN tag as t on article_has_tag.id_tag = t.id" +
+                    "ORDER BY published DESC";
+            statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+
+            Map<Long, Article> articles = new HashMap<>();
+            Map<Long, Tag> tags = new HashMap<>();
+
+            while (resultSet.next()) {
+
+
+                // article
+                Long idArticle = resultSet.getLong("id_article");
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                String image = resultSet.getString("image");
+                Date published = resultSet.getDate("published");
+
+                // tag
+                Long idTag = resultSet.getLong("id_tag");
+                String name = resultSet.getString("tagName");
+                Integer color = resultSet.getInt("color");
+
+                // get object instances
+                if (!articles.containsKey(idArticle)) {
+                    articles.put(idArticle, new Article());
+                }
+                Article article = articles.get(idArticle);
+
+                if (!tags.containsKey(idTag)) {
+                    tags.put(idTag, new Tag());
+                }
+                Tag tag = tags.get(idTag);
+
+                // fill them
+                article.setId(idArticle);
+                article.setTitle(title);
+                article.setContent(content);
+                article.setImage(image);
+                article.setPublished(published);
+                article.addTag(tag);
+                tag.setId(idTag);
+                tag.setColor(new Color(color));
+                tag.setTagName(name);
+
+                // user
+                Long idUser = resultSet.getLong("id_user");
+                User user = userDao.findById(idUser);
+                article.setUser(user);
+
+            }
+
+            return new ArrayList<>(articles.values());
+
+        } catch (SQLException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "findAllFailed", e);
+        } finally {
+            JdbcUtils.closeResultSet(resultSet);
+            JdbcUtils.closeStatement(statement);
+            JdbcUtils.closeConnection(connection);
+        }
+    }
+
+
+    public List<Article> findAllOld() {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -58,11 +130,10 @@ public class ArticleRepository implements ArticleDao {
                 Long id_user = resultSet.getLong("id_user");
 
                 // Read the article's author
-                User user = new User();
-                user = userDao.findById(id_user);
+                User user = userDao.findById(id_user);
 
                 // Read the tag list of the article
-                List<Tag> tags = new ArrayList<>();
+                List<Tag> tags = null;
                 tags = tagDao.findAllInArticle(id);
 
                 articles.add(new Article(id, title, content, image, published, user, tags));
@@ -72,15 +143,13 @@ public class ArticleRepository implements ArticleDao {
             return articles;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "findAllFailed", e);
         } finally {
             JdbcUtils.closeResultSet(resultSet);
             JdbcUtils.closeStatement(statement);
             JdbcUtils.closeConnection(connection);
         }
-        return null;
     }
-
     @Override
     public Article findById(Long id) {
 
