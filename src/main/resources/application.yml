@@ -1,3 +1,17 @@
+hello: "C'est le mode dev"
+
+spring:
+  profiles: default
+
+server:
+  port: 8080
+
+mysql:
+  url: "jdbc:mysql://localhost:3306/BLOG_JAVA?serverTimezone=GMT"
+  username: blog_root
+  password: egh5ohCuey0o
+
+---
 hello: "C'est la prod"
 
 spring:
@@ -11,16 +25,4 @@ mysql:
   username: ${APP_USERNAME}
   password: ${APP_PASSWORD}
 
----
-hello: "C'est le mode dev"
 
-spring:
-  profiles: default
-
-server:
-  port: 8080
-
-mysql:
-  url: "jdbc:mysql://captain.javarover.wilders.dev:33306/BLOG_JAVA?serverTimezone=GMT"
-  username: root
-  password: egh5ohCuey0o

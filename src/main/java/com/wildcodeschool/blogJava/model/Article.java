@@ -58,7 +58,6 @@ public class Article {
     public void setImage(String image) {
         this.image = image;
     }
-
     public Date getPublished() {
         return this.published;
     }

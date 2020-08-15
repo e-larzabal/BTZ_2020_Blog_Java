@@ -5,12 +5,14 @@
 
     <!--div class="card-text" th:each="tag : ${article.tags}"-->
     <tags class="ml-4 my-1">
-        <span class="card-text" th:if="${article.listTag.empty}">
+        <span class="card-text" th:if="${article.listTag == null}">
             <span class="card-text"><i>No Tags Available </i></span>
         </span>
-        <span class="card-text" th:each="tag : ${article.listTag}">
-            <a href="#" th:href="|/articles/tag/${tag.id}|" class="badge badge-pill badge-primary ml-2  px-3 pl-1"
-                th:text="${tag.tagName}" style="background: #A882DD;"> Tag </a>
+        <span class="card-text" th:if="${article.listTag != null}">
+            <span class="card-text" th:each="tag : ${article.listTag}">
+                <a href="#" th:href="|/articles/tag/${tag.id}|" class="badge badge-pill badge-primary ml-2  px-3 pl-1"
+                    th:text="${tag.tagName}" style="background: #A882DD;"> Tag </a>
+            </span>
         </span>
     </tags>
     <div class="card-body">

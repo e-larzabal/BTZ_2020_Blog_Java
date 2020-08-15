@@ -51,7 +51,7 @@
 
         <!-- Tags -->
         <tags class="ml-4 my-2">
-          <span class="card-text" th:if="${article.listTag.empty}">
+          <span class="card-text" th:if="${#strings.listIsEmpty(article.listTag)}">
             <span class="card-text"><i>No Tags Available </i></span>
           </span>
           <span class="card-text" th:each="tag : ${article.listTag}">
